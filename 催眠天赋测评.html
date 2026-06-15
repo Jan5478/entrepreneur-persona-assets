@@ -1,0 +1,3625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>催眠师天赋测评 · 立项展示</title>
+<style>
+  :root {
+    --bg:        #F4F1EC;
+    --bg-card:   #FFFFFF;
+    --bg-mid:    #EAE6DF;
+    --gold:      #7A4F1E;
+    --gold-dim:  #9B6830;
+    --white:     #1A1208;
+    --muted:     #5A4A38;
+    --rupture:   #8B2E2E;
+    --divider:   #D8D0C4;
+    --world1:    #7A4F1E;
+    --world2:    #1E5C8B;
+    --world3:    #2E6E2E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 50%, rgba(122,79,30,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* 三同心圆动画 — 签名元素 */
+  .rings {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .ring-1 {
+    width: 44px; height: 44px;
+    border-color: var(--world1);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .ring-2 {
+    width: 84px; height: 84px;
+    border-color: var(--world2);
+    opacity: 0.7;
+    animation: pulse 3s ease-in-out infinite 0.6s;
+  }
+
+  .ring-3 {
+    width: 130px; height: 130px;
+    border-color: var(--world3);
+    opacity: 0.5;
+    animation: pulse 3s ease-in-out infinite 1.2s;
+  }
+
+  .ring-dot {
+    position: absolute;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.04); }
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .hero-title {
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-title span { color: var(--gold); }
+
+  .hero-subtitle {
+    font-size: clamp(14px, 2vw, 17px);
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 52px;
+    max-width: 460px;
+    line-height: 1.7;
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tag {
+    border: 1px solid rgba(122,79,30,0.3);
+    color: var(--gold-dim);
+    padding: 5px 16px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    font-weight: 300;
+    border-radius: 2px;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px 120px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    border-top: 1px solid var(--divider);
+    padding: 72px 0;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0 52px;
+  }
+
+  .section-label { padding-top: 4px; }
+
+  .section-num {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .section-name {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .section-body h2 {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .section-body p {
+    color: var(--muted);
+    margin-bottom: 14px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  .section-body p strong { color: var(--white); font-weight: 600; }
+
+  /* ── INFO GRID ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 28px;
+  }
+
+  .info-cell {
+    background: var(--bg-card);
+    padding: 22px 26px;
+  }
+
+  .info-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 400;
+  }
+
+  .info-value {
+    font-size: 15px;
+    color: var(--white);
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  /* ── AUDIENCE ── */
+  .audience-list {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .audience-item {
+    background: var(--bg-card);
+    padding: 18px 26px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .audience-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 9px;
+  }
+
+  .audience-text {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .audience-text strong { color: var(--white); font-weight: 600; }
+
+  /* ── THREE WORLDS MODEL ── */
+  .worlds-model {
+    margin-top: 32px;
+    position: relative;
+  }
+
+  .worlds-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .world-card {
+    padding: 24px 28px;
+    border-left: 3px solid;
+    position: relative;
+  }
+
+  .world-card.w1 {
+    background: rgba(122,79,30,0.06);
+    border-color: var(--world1);
+  }
+
+  .world-card.w2 {
+    background: rgba(30,92,139,0.06);
+    border-color: var(--world2);
+  }
+
+  .world-card.w3 {
+    background: rgba(46,110,46,0.06);
+    border-color: var(--world3);
+  }
+
+  .world-connector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 28px;
+    background: var(--bg-mid);
+  }
+
+  .connector-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    opacity: 0.4;
+  }
+
+  .connector-text {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .world-number {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .world-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .world-card.w1 .world-title { color: var(--world1); }
+  .world-card.w2 .world-title { color: var(--world2); }
+  .world-card.w3 .world-title { color: var(--world3); }
+
+  .world-dims {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .dim-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .w1 .dim-badge { background: rgba(122,79,30,0.10); color: var(--world1); }
+  .w2 .dim-badge { background: rgba(30,92,139,0.10); color: var(--world2); }
+  .w3 .dim-badge { background: rgba(46,110,46,0.10); color: var(--world3); }
+
+  .world-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .coach-crash {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 2px;
+  }
+
+  .coach-box, .crash-box {
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  .coach-box {
+    background: rgba(46,110,46,0.07);
+    border-top: 2px solid var(--world3);
+  }
+
+  .crash-box {
+    background: rgba(139,46,46,0.07);
+    border-top: 2px solid var(--rupture);
+  }
+
+  .cc-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .coach-box .cc-label { color: var(--world3); }
+  .crash-box .cc-label { color: var(--rupture); }
+
+  .cc-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── DIMENSIONS ── */
+  .dim-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 28px;
+  }
+
+  .dim-card {
+    background: var(--bg-card);
+    padding: 24px 28px;
+    border-left: 2px solid var(--gold-dim);
+  }
+
+  .dim-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .dim-num {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .dim-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .dim-world {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+    letter-spacing: 0.05em;
+  }
+
+  .dim-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+
+  .dim-states {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 12px;
+  }
+
+  .state-box {
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .state-smooth {
+    background: rgba(46,110,46,0.06);
+    border-left: 2px solid var(--world3);
+    color: var(--muted);
+  }
+
+  .state-stuck {
+    background: rgba(139,46,46,0.06);
+    border-left: 2px solid var(--rupture);
+    color: var(--muted);
+  }
+
+  .state-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 600;
+    display: block;
+  }
+
+  .state-smooth .state-label { color: var(--world3); }
+  .state-stuck .state-label { color: var(--rupture); }
+
+  /* ── MODULES FLOW ── */
+  .modules-flow {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .module-card {
+    background: var(--bg-card);
+    padding: 28px 32px;
+    position: relative;
+  }
+
+  .module-connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    position: relative;
+  }
+
+  .module-connector::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold-dim), transparent);
+    opacity: 0.3;
+  }
+
+  .module-arrow {
+    color: var(--gold-dim);
+    font-size: 14px;
+    background: var(--bg);
+    padding: 0 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .module-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .module-num {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  .module-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+
+  .module-function {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+
+  .module-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.85;
+    margin-bottom: 16px;
+  }
+
+  .module-body strong { color: var(--white); font-weight: 600; }
+
+  .module-input {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .input-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    background: rgba(122,79,30,0.07);
+    border: 1px solid rgba(122,79,30,0.2);
+    color: var(--gold-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .hook-box {
+    border-left: 2px solid var(--rupture);
+    padding: 12px 18px;
+    background: rgba(139,46,46,0.05);
+    margin-top: 14px;
+  }
+
+  .hook-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--rupture);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+    display: block;
+  }
+
+  .hook-text {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 400;
+    line-height: 1.75;
+  }
+
+  .hook-text .note {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ── RUPTURE MODULE (M04) ── */
+  .module-card.rupture {
+    border-left: 3px solid var(--rupture);
+    background: rgba(139,46,46,0.04);
+  }
+
+  .module-card.rupture .module-title {
+    color: #C4726A;
+  }
+
+  .rupture-model {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .trigger-box {
+    background: rgba(122,79,30,0.05);
+    padding: 16px 18px;
+    border-top: 2px solid var(--gold-dim);
+  }
+
+  .trigger-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+    display: block;
+  }
+
+  .trigger-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .rupture-bottom {
+    grid-column: 1 / -1;
+    background: rgba(139,46,46,0.07);
+    border-top: 2px solid var(--rupture);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .rupture-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--rupture);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+    display: block;
+  }
+
+  .rupture-desc { font-size: 14px; color: var(--muted); }
+
+  .recovery-box {
+    grid-column: 1 / -1;
+    background: rgba(46,110,46,0.06);
+    border-top: 2px solid var(--world3);
+    padding: 16px 18px;
+    text-align: center;
+  }
+
+  .recovery-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--world3);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+    display: block;
+  }
+
+  /* ── HOOKS SUMMARY ── */
+  .hooks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 28px;
+  }
+
+  .hook-card {
+    background: var(--bg-card);
+    padding: 22px 24px;
+    border-top: 2px solid var(--gold-dim);
+  }
+
+  .hook-card-num {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 600;
+  }
+
+  .hook-card-q {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .hook-card-a {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── COURSE MAP ── */
+  .course-map {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .course-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 2px;
+  }
+
+  .course-stage {
+    background: var(--bg-card);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .stage-num {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .course-content {
+    background: rgba(234,230,223,0.8);
+    padding: 16px 18px;
+  }
+
+  .course-title {
+    font-size: 13px;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .course-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .course-dim {
+    background: rgba(122,79,30,0.05);
+    padding: 16px 18px;
+    border-left: 2px solid rgba(122,79,30,0.2);
+  }
+
+  .course-dim-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .course-dim-value {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── DIFF TABLE ── */
+  .diff-table {
+    margin-top: 28px;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .diff-table th {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    background: var(--bg-mid);
+    font-weight: 600;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .diff-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--muted);
+    vertical-align: top;
+    border-bottom: 1px solid var(--divider);
+    line-height: 1.65;
+  }
+
+  .diff-table td:first-child {
+    color: var(--gold-dim);
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .diff-table td strong { color: var(--white); }
+
+  .diff-table tr:hover td { background: rgba(122,79,30,0.03); }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--divider);
+    padding: 48px 0 0;
+    text-align: center;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+  }
+
+  /* ── NARRATIVE ARC ── */
+  .arc-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 28px;
+  }
+
+  .arc-step {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2px;
+  }
+
+  .arc-module {
+    background: var(--bg-card);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .arc-mod-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .arc-mod-name {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .arc-content {
+    background: rgba(234,230,223,0.7);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .arc-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .arc-emotion {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    flex-shrink: 0;
+    border: 1px solid rgba(122,79,30,0.25);
+    padding: 4px 10px;
+  }
+
+  .arc-connector {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+  }
+
+  .arc-arrow {
+    font-size: 16px;
+    color: rgba(122,79,30,0.3);
+  }
+
+  @media (max-width: 640px) {
+    .section { grid-template-columns: 1fr; gap: 24px 0; }
+    .section-label { display: none; }
+    .info-grid, .coach-crash, .dim-states, .hooks-grid { grid-template-columns: 1fr; }
+    .rupture-model { grid-template-columns: 1fr; }
+    .course-row { grid-template-columns: 1fr; }
+    .arc-step { grid-template-columns: 1fr; }
+    .page { padding: 0 20px 80px; }
+  }
+  /* ── THREE WORLDS MODEL ── */
+  .model-container {
+    margin-top: 32px;
+  }
+
+  .three-worlds-model {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tw-world {
+    padding: 24px 28px;
+    border-left: 4px solid;
+    position: relative;
+  }
+
+  .tw-world-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .tw-left { flex: 1; }
+  .tw-right {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .tw-w1 { background: rgba(122,79,30,0.06); border-color: var(--world1); }
+  .tw-w2 { background: rgba(30,92,139,0.06); border-color: var(--world2); }
+  .tw-w3 { background: rgba(46,110,46,0.06); border-color: var(--world3); }
+
+  .tw-num {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .tw-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .tw-w1 .tw-title { color: var(--world1); }
+  .tw-w2 .tw-title { color: var(--world2); }
+  .tw-w3 .tw-title { color: var(--world3); }
+
+  .tw-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .tw-dim-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-end;
+  }
+
+  .tw-dim {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .tw-dim-w1 { background: rgba(122,79,30,0.10); color: var(--world1); }
+  .tw-dim-w2 { background: rgba(30,92,139,0.10); color: var(--world2); }
+  .tw-dim-w3 { background: rgba(46,110,46,0.10); color: var(--world3); }
+
+  .tw-ability {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  .tw-flow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 28px;
+    background: var(--bg-mid);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tw-flow-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(90,74,56,0.3), transparent);
+  }
+
+  .tw-flow-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .tw-flow-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .tw-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--world1);
+    display: inline-block;
+    animation: flowDown 1.2s ease-in-out infinite;
+    opacity: 0;
+  }
+
+  .tw-dot-b { background: var(--world2); }
+
+  @keyframes flowDown {
+    0% { opacity: 0; transform: translateY(-4px); }
+    40% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(4px); }
+  }
+
+  .tw-result-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    background: var(--bg-mid);
+  }
+
+  .tw-result-line {
+    width: 1px;
+    height: 16px;
+    background: rgba(90,74,56,0.3);
+  }
+
+  .tw-outcome {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .tw-coach {
+    background: rgba(46,110,46,0.07);
+    border-top: 3px solid var(--world3);
+    padding: 20px 20px;
+    text-align: center;
+  }
+
+  .tw-crash {
+    background: rgba(139,46,46,0.07);
+    border-top: 3px solid var(--rupture);
+    padding: 20px 20px;
+    text-align: center;
+  }
+
+  .tw-vs {
+    background: var(--bg-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    color: var(--muted);
+    font-size: 18px;
+    border-top: 3px solid var(--bg-mid);
+  }
+
+  .tw-outcome-label {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  .tw-coach-label { color: var(--world3); }
+  .tw-crash-label { color: var(--rupture); }
+
+  .tw-outcome-sub {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .tw-outcome-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── FLOW & DISRUPTION MODEL ── */
+  .fd-model {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .fd-triggers {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 0;
+    width: 100%;
+  }
+
+  .fd-trigger {
+    padding: 20px 20px;
+    text-align: center;
+  }
+
+  .fd-external {
+    background: rgba(122,79,30,0.06);
+    border: 1px solid rgba(122,79,30,0.15);
+    border-bottom: none;
+  }
+
+  .fd-internal {
+    background: rgba(30,92,139,0.06);
+    border: 1px solid rgba(30,92,139,0.15);
+    border-bottom: none;
+  }
+
+  .fd-trigger-gap {
+    background: var(--bg);
+  }
+
+  .fd-trigger-icon {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .fd-trigger-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .fd-trigger-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .fd-trigger-sub {
+    font-size: 11px;
+    color: var(--rupture);
+    opacity: 0.8;
+  }
+
+  .fd-converge {
+    width: 100%;
+    margin: 0;
+    line-height: 0;
+  }
+
+  .fd-crash-node {
+    width: 80%;
+    max-width: 380px;
+    background: rgba(139,46,46,0.10);
+    border: 2px solid var(--rupture);
+    padding: 20px 24px;
+    text-align: center;
+  }
+
+  .fd-crash-title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--rupture);
+    margin-bottom: 4px;
+  }
+
+  .fd-crash-sub {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--rupture);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .fd-crash-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .fd-down-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+  }
+
+  .fd-down-line {
+    width: 1px;
+    height: 14px;
+    background: rgba(90,74,56,0.3);
+  }
+
+  .fd-down-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    background: var(--bg-mid);
+    padding: 3px 12px;
+    border: 1px solid rgba(122,79,30,0.2);
+  }
+
+  .fd-diverge {
+    width: 100%;
+    margin: 0;
+    line-height: 0;
+  }
+
+  .fd-outcomes {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 0;
+    width: 100%;
+  }
+
+  .fd-outcome {
+    padding: 20px 20px;
+    text-align: center;
+  }
+
+  .fd-outcome-gap { background: var(--bg); }
+
+  .fd-flow {
+    background: rgba(46,110,46,0.07);
+    border: 1px solid rgba(46,110,46,0.2);
+    border-top: 3px solid var(--world3);
+  }
+
+  .fd-stuck {
+    background: rgba(139,46,46,0.06);
+    border: 1px solid rgba(139,46,46,0.15);
+    border-top: 3px solid var(--rupture);
+    opacity: 0.75;
+  }
+
+  .fd-outcome-icon {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .fd-flow .fd-outcome-icon { color: var(--world3); }
+  .fd-stuck .fd-outcome-icon { color: var(--rupture); }
+
+  .fd-outcome-label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .fd-flow .fd-outcome-label { color: var(--world3); }
+  .fd-stuck .fd-outcome-label { color: var(--rupture); }
+
+  .fd-outcome-state {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--muted);
+  }
+
+  .fd-outcome-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .fd-footer-note {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gold-dim);
+    line-height: 1.8;
+    padding: 12px 20px;
+    background: rgba(122,79,30,0.04);
+    border: 1px solid rgba(122,79,30,0.12);
+    width: 100%;
+  }
+
+  /* ── MODULE 02 MAP ── */
+  .m2-map {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--divider);
+  }
+
+  .m2-label-row {
+    background: var(--bg-mid);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .m2-example-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .m2-world {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+  }
+
+  .m2-world-left {
+    flex: 1;
+    padding: 22px 24px;
+  }
+
+  .m2-world-right {
+    flex-shrink: 0;
+    width: 130px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-left: 1px solid var(--divider);
+  }
+
+  .m2-high {
+    background: var(--bg-card);
+  }
+
+  .m2-low {
+    background: rgba(234,230,223,0.5);
+    opacity: 0.85;
+  }
+
+  .m2-world-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .m2-world-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .m2-status {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    padding: 2px 8px;
+  }
+
+  .m2-status-high {
+    color: var(--world3);
+    background: rgba(46,110,46,0.08);
+  }
+
+  .m2-status-low {
+    color: var(--muted);
+    background: rgba(90,74,56,0.06);
+  }
+
+  .m2-world-name {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .m2-world-result {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .m2-score-bar {
+    width: 70px;
+    height: 6px;
+    background: var(--bg-mid);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .m2-score-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s ease;
+  }
+
+  .m2-fill-w1 { background: var(--world1); }
+  .m2-fill-w2 { background: var(--world2); }
+  .m2-fill-low { background: var(--divider); }
+
+  .m2-score-num {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .m2-dims {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .m2-dim {
+    font-size: 10px;
+    padding: 2px 8px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    border-radius: 2px;
+  }
+
+  .m2-flow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .m2-flow-open { background: rgba(46,110,46,0.04); }
+  .m2-flow-blocked { background: rgba(139,46,46,0.04); }
+
+  .m2-flow-line {
+    flex: 1;
+    height: 1px;
+  }
+
+  .m2-flow-active {
+    background: linear-gradient(90deg, transparent, var(--world2), transparent);
+    opacity: 0.4;
+  }
+
+  .m2-flow-dim {
+    background: linear-gradient(90deg, transparent, var(--divider), transparent);
+  }
+
+  .m2-flow-center {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .m2-flow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: flowDown 1s ease-in-out infinite;
+    opacity: 0;
+  }
+
+  .m2-flow-text {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .m2-flow-open-text { color: var(--world3); }
+  .m2-flow-blocked-text { color: var(--rupture); }
+
+  .m2-block-icon {
+    font-size: 13px;
+    color: var(--rupture);
+    font-weight: 700;
+  }
+
+  .m2-insight {
+    background: var(--bg-mid);
+    padding: 18px 24px;
+    border-top: 1px solid var(--divider);
+  }
+
+  .m2-insight-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .m2-insight-text {
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  /* ── STATIC THREE WORLDS DIAGRAM ── */
+  .tw-static-diagram {
+    margin-top: 20px;
+    border: 1px solid var(--divider);
+    overflow: hidden;
+  }
+
+  .tw-static-header {
+    background: var(--bg-mid);
+    padding: 8px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .tw-static-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .tw-static-world {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 22px 24px;
+    border-left: 4px solid;
+  }
+
+  .tw-static-w1 {
+    background: rgba(122,79,30,0.05);
+    border-color: var(--world1);
+  }
+
+  .tw-static-w2 {
+    background: rgba(30,92,139,0.05);
+    border-color: var(--world2);
+  }
+
+  .tw-static-w3 {
+    background: rgba(46,110,46,0.05);
+    border-color: var(--world3);
+  }
+
+  .tw-static-icon {
+    font-size: 28px;
+    width: 52px;
+    flex-shrink: 0;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  .tw-static-w1 .tw-static-icon { color: var(--world1); }
+  .tw-static-w2 .tw-static-icon { color: var(--world2); }
+  .tw-static-w3 .tw-static-icon { color: var(--world3); }
+
+  .tw-static-body {
+    flex: 1;
+    padding: 0 20px;
+  }
+
+  .tw-static-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .tw-static-name {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .tw-static-w1 .tw-static-name { color: var(--world1); }
+  .tw-static-w2 .tw-static-name { color: var(--world2); }
+  .tw-static-w3 .tw-static-name { color: var(--world3); }
+
+  .tw-static-ability {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .tw-static-tags {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-end;
+  }
+
+  .tw-static-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .tw-tag-w1 { background: rgba(122,79,30,0.10); color: var(--world1); }
+  .tw-tag-w2 { background: rgba(30,92,139,0.10); color: var(--world2); }
+  .tw-tag-w3 { background: rgba(46,110,46,0.10); color: var(--world3); }
+
+  .tw-static-flow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 24px;
+    background: var(--bg-mid);
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .tw-static-flow-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(90,74,56,0.25), transparent);
+  }
+
+  .tw-static-flow-text {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .tw-static-flow-dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .tw-static-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: flowDown 1.4s ease-in-out infinite;
+    opacity: 0;
+  }
+
+  .tw-sdot-w1 { background: var(--world1); }
+  .tw-sdot-w2 { background: var(--world2); }
+  .tw-sdot-w3 { background: var(--world3); }
+
+  .tw-static-result-arrow {
+    background: var(--bg-mid);
+    padding: 6px 0;
+    border-top: 1px solid var(--divider);
+  }
+
+  .tw-static-outcome-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    border-top: 1px solid var(--divider);
+  }
+
+  .tw-static-outcome-box {
+    padding: 18px 20px;
+    text-align: center;
+  }
+
+  .tw-static-coach {
+    background: rgba(46,110,46,0.06);
+    border-top: 3px solid var(--world3);
+  }
+
+  .tw-static-crash {
+    background: rgba(139,46,46,0.06);
+    border-top: 3px solid var(--rupture);
+  }
+
+  .tw-static-outcome-sep {
+    background: var(--bg-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    color: var(--muted);
+    font-size: 18px;
+    border-top: 3px solid var(--divider);
+  }
+
+  .tw-static-outcome-title {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+
+  .tw-static-coach .tw-static-outcome-title { color: var(--world3); }
+  .tw-static-crash .tw-static-outcome-title { color: var(--rupture); }
+
+  .tw-static-outcome-sub {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .tw-static-outcome-eq {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .tw-static-coach .tw-static-outcome-eq { color: var(--world3); }
+  .tw-static-crash .tw-static-outcome-eq { color: var(--rupture); }
+
+  /* ── TRIANGLE DIAGRAM ── */
+  .tw-triangle-diagram {
+    margin-top: 20px;
+    border: 1px solid var(--divider);
+    overflow: hidden;
+  }
+
+  .tw-triangle-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: center;
+  }
+
+  .tw-triangle-svg-wrap {
+    padding: 20px 16px 16px 20px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--divider);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .tw-triangle-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .tw-crash-mini {
+    width: 55%;
+  }
+
+  .tw-crash-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .tw-triangle-legend {
+    padding: 24px;
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .tw-tri-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .tw-tri-item:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .tw-tri-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .tw-tri-info { flex: 1; }
+
+  .tw-tri-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2px;
+    line-height: 1.4;
+  }
+
+  .tw-tri-ability {
+    font-size: 12px;
+    color: var(--gold-dim);
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+
+  .tw-tri-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 640px) {
+    .tw-triangle-body { grid-template-columns: 1fr; }
+    .tw-triangle-svg-wrap { border-right: none; border-bottom: 1px solid var(--divider); }
+  }
+
+  /* ── M2 TYPE NAME ── */
+  .m2-type-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gold);
+    margin: 8px 0 10px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── M3 DEMO ── */
+  .m3-demo {
+    margin-top: 20px;
+    border: 1px solid var(--divider);
+    overflow: hidden;
+  }
+
+  .m3-demo-label {
+    background: var(--bg-mid);
+    padding: 8px 20px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .m3-layer {
+    border-top: 1px solid var(--divider);
+    padding: 0;
+  }
+
+  .m3-layer-open { background: var(--bg-card); }
+  .m3-layer-blocked { background: rgba(234,230,223,0.4); }
+
+  .m3-layer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .m3-layer-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .m3-layer-world {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .m3-layer-status {
+    font-size: 10px;
+    padding: 2px 8px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    border-radius: 2px;
+  }
+
+  .m3-status-open {
+    background: rgba(46,110,46,0.08);
+    color: var(--world3);
+  }
+
+  .m3-status-blocked {
+    background: rgba(90,74,56,0.07);
+    color: var(--muted);
+  }
+
+  .m3-layer-scores {
+    display: flex;
+    gap: 14px;
+  }
+
+  .m3-score-item {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .m3-score-item strong {
+    font-size: 15px;
+    font-weight: 800;
+    margin-left: 3px;
+  }
+
+  .m3-layer-content {
+    padding: 0 20px 14px;
+  }
+
+  .m3-layer-content p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+
+  .m3-layer-content p:last-child { margin-bottom: 0; }
+
+  .m3-layer-hook {
+    font-size: 12px;
+    color: var(--gold-dim);
+    font-style: italic;
+    padding: 10px 20px;
+    background: rgba(122,79,30,0.04);
+    border-top: 1px solid rgba(122,79,30,0.1);
+    border-left: 3px solid var(--gold-dim);
+    line-height: 1.65;
+  }
+
+  /* ── M4 RUPTURE DETAIL ── */
+  .rupture-detail {
+    margin-top: 20px;
+    border: 1px solid rgba(139,46,46,0.2);
+    overflow: hidden;
+  }
+
+  .rupture-detail-label {
+    background: rgba(139,46,46,0.05);
+    padding: 8px 20px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--rupture);
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(139,46,46,0.15);
+  }
+
+  .rd-mode-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .rd-mode-icon {
+    font-size: 20px;
+    color: var(--rupture);
+    opacity: 0.7;
+  }
+
+  .rd-mode-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--rupture);
+    letter-spacing: 0.05em;
+  }
+
+  .rd-mode-sub {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .rd-section {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--divider);
+    background: var(--bg-card);
+  }
+
+  .rd-section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .rd-section-text {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.85;
+  }
+
+  .rd-impact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .rd-impact-box {
+    padding: 18px 20px;
+  }
+
+  .rd-pro {
+    background: rgba(46,110,46,0.05);
+    border-top: 2px solid var(--world3);
+    border-right: 1px solid var(--divider);
+  }
+
+  .rd-con {
+    background: rgba(139,46,46,0.05);
+    border-top: 2px solid var(--rupture);
+  }
+
+  .rd-impact-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .rd-pro .rd-impact-label { color: var(--world3); }
+  .rd-con .rd-impact-label { color: var(--rupture); }
+
+  .rd-impact-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .rd-impact-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .rd-pro-dot { background: var(--world3); }
+  .rd-con-dot { background: var(--rupture); }
+
+  @media (max-width: 640px) {
+    .rd-impact { grid-template-columns: 1fr; }
+    .rd-pro { border-right: none; border-bottom: 1px solid var(--divider); }
+  }
+
+  /* ── M3 DIM CARDS ── */
+  .m3-dim-card {
+    border-top: 1px solid var(--divider);
+    padding: 0;
+  }
+
+  .m3-dim-open { background: var(--bg-card); }
+  .m3-dim-blocked { background: rgba(234,230,223,0.5); }
+
+  .m3-dim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px 8px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .m3-dim-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .m3-dim-code {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .m3-dim-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .m3-dim-world {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .m3-dim-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .m3-dim-bar {
+    width: 60px;
+    height: 4px;
+    background: var(--bg-mid);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .m3-dim-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+
+  .m3-dim-score {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    min-width: 28px;
+    text-align: right;
+  }
+
+  .m3-dim-tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .m3-tag-open { background: rgba(46,110,46,0.08); color: var(--world3); }
+  .m3-tag-blocked { background: rgba(90,74,56,0.07); color: var(--muted); }
+
+  .m3-dim-body {
+    padding: 4px 20px 12px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .m3-dim-hook {
+    padding: 10px 20px;
+    font-size: 12px;
+    color: var(--gold-dim);
+    font-style: italic;
+    border-top: 1px solid rgba(122,79,30,0.1);
+    border-left: 3px solid var(--gold-dim);
+    background: rgba(122,79,30,0.03);
+    line-height: 1.65;
+  }
+
+  /* ── M5 PATHS ── */
+  .m5-paths {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--divider);
+    overflow: hidden;
+  }
+
+  .m5-path {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .m5-path:last-child { border-bottom: none; }
+
+  .m5-path-index {
+    background: var(--bg-mid);
+    padding: 18px 16px;
+    font-size: 11px;
+    color: var(--gold-dim);
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    display: flex;
+    align-items: flex-start;
+    border-right: 1px solid var(--divider);
+    line-height: 1.5;
+  }
+
+  .m5-path-body {
+    padding: 18px 20px;
+    background: var(--bg-card);
+  }
+
+  .m5-path-need {
+    font-size: 13px;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .m5-path-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  .m5-path-stage {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(122,79,30,0.05);
+    border-left: 3px solid var(--gold);
+    flex-wrap: wrap;
+  }
+
+  .m5-stage-label {
+    font-size: 10px;
+    color: var(--gold-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .m5-stage-name {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .m5-stage-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  /* ── M5 ACTION ── */
+  .m5-action {
+    margin-top: 20px;
+    padding: 20px 24px;
+    background: var(--bg-mid);
+    border: 1px solid var(--divider);
+  }
+
+  .m5-action-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .m5-action-desc {
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.9;
+  }
+
+  .m5-action-desc em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="rings">
+    <div class="ring ring-3"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-1"></div>
+    <div class="ring-dot"></div>
+  </div>
+  <h1 class="hero-title">催眠师<span>天赋</span>测评</h1>
+  <p class="hero-subtitle">一套基于吉利根生生不息催眠体系的测评产品<br>帮助用户看见自己的催眠师天赋状态，精准连接五阶课程</p>
+  <div class="hero-tags">
+    <span class="tag">销转工具</span>
+    <span class="tag">催眠师天赋</span>
+    <span class="tag">三个世界</span>
+    <span class="tag">生生不息催眠</span>
+  </div>
+</section>
+
+<div class="page">
+
+  <!-- 01 测评定位 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">01</span>
+      <span class="section-name">测评定位</span>
+    </div>
+    <div class="section-body">
+      <h2>这是一个什么测评</h2>
+      <p>一套基于吉利根生生不息催眠体系的<strong>催眠师天赋测评</strong>，核心目的是销转五阶催眠课程。</p>
+      <p>测评回答用户一个最本质的问题：</p>
+      <p><strong>「我有没有成为催眠师的天赋潜质——以及，我的天赋现在激活了多少？」</strong></p>
+      <p>不是从性格标签入手，而是从吉利根三个世界的理论框架入手，帮用户看见自己在发展催眠天赋的路上，哪里是顺畅的，哪里是卡住的，以及解锁的方向。</p>
+      <div class="info-grid">
+        <div class="info-cell">
+          <span class="info-label">核心主题</span>
+          <div class="info-value">你的催眠师天赋<br>激活了多少</div>
+        </div>
+        <div class="info-cell">
+          <span class="info-label">产品定位</span>
+          <div class="info-value">拉新销转工具<br>专业咨询师入口</div>
+        </div>
+        <div class="info-cell">
+          <span class="info-label">分发渠道</span>
+          <div class="info-value">小红书 · 公域直播<br>线下课程 · 私域社群</div>
+        </div>
+        <div class="info-cell">
+          <span class="info-label">转化路径</span>
+          <div class="info-value">完成测评 → 查看报告<br>→ 添加企业微信</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 目标受众 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">02</span>
+      <span class="section-name">目标受众</span>
+    </div>
+    <div class="section-body">
+      <h2>谁会做这个测评</h2>
+      <p>测评聚焦<strong>有执业基础的心理咨询师和助人工作者</strong>，核心钩子打在他们最普遍的执业痛点上。</p>
+      <div class="audience-list">
+        <div class="audience-item">
+          <div class="audience-dot"></div>
+          <div class="audience-text"><strong>执业瓶颈型</strong> ——能做基础个案，但深度工作进不去。技术都用了，但来访者就是到不了更深的地方。核心问题：「我的执业天花板在哪里？」</div>
+        </div>
+        <div class="audience-item">
+          <div class="audience-dot"></div>
+          <div class="audience-text"><strong>自身被带走型</strong> ——能进入来访者的世界，但陪着陪着自己也崩了。边界不稳，替代性创伤，被掏空的感觉。核心问题：「我怎么既能完全临在，又不迷失？」</div>
+        </div>
+        <div class="audience-item">
+          <div class="audience-dot"></div>
+          <div class="audience-text"><strong>想入行型</strong> ——对催眠感兴趣，有助人的热情和直觉，想知道自己是否适合走这条路。核心问题：「我天生适合做催眠师吗？」</div>
+        </div>
+      </div>
+      <p style="margin-top: 20px;">用户做完测评最理想的感受：<strong>「原来我天生就有这个能力——我要去学，把它系统激活。」</strong></p>
+    </div>
+  </section>
+
+  <!-- 03 理论框架 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">03</span>
+      <span class="section-name">理论框架</span>
+    </div>
+    <div class="section-body">
+      <h2>测评测什么</h2>
+      <p>基于吉利根生生不息催眠体系最核心的理论——<strong>三个世界/三重心智模型</strong>，提取三个主维度和一个独立维度，共七个二级测量维度。</p>
+      <p>三个世界不是三个静止的层次，而是三者之间需要同时打通的<strong>创造性流动</strong>。这个流动畅通，就是COACH；流动堵塞，就是CRASH。</p>
+
+      <!-- 三个世界模型图 -->
+      <div class="model-container">
+
+        <div class="three-worlds-model">
+
+          <!-- 第一个世界 -->
+          <div class="tw-world tw-w1">
+            <div class="tw-world-inner">
+              <div class="tw-left">
+                <span class="tw-num">第一个世界</span>
+                <div class="tw-title">创造性源头 · 灵魂临在</div>
+                <div class="tw-desc">你真正在这里的能力——不是技术，是你这个人在房间里的重量</div>
+              </div>
+              <div class="tw-right">
+                <div class="tw-dim-group">
+                  <span class="tw-dim tw-dim-w1">场域感知</span>
+                  <span class="tw-dim tw-dim-w1">醒觉力</span>
+                </div>
+                <div class="tw-ability">临在天赋</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 流动箭头 1 -->
+          <div class="tw-flow">
+            <div class="tw-flow-line"></div>
+            <div class="tw-flow-dots">
+              <span class="tw-dot" style="animation-delay:0s"></span>
+              <span class="tw-dot" style="animation-delay:0.3s"></span>
+              <span class="tw-dot" style="animation-delay:0.6s"></span>
+            </div>
+            <div class="tw-flow-label">创造性流动</div>
+            <div class="tw-flow-line"></div>
+          </div>
+
+          <!-- 第二个世界 -->
+          <div class="tw-world tw-w2">
+            <div class="tw-world-inner">
+              <div class="tw-left">
+                <span class="tw-num">第二个世界</span>
+                <div class="tw-title">创造性潜意识</div>
+                <div class="tw-desc">感应来访者内在的能力——最重要的部分住在他的潜意识里，他自己也不知道</div>
+              </div>
+              <div class="tw-right">
+                <div class="tw-dim-group">
+                  <span class="tw-dim tw-dim-w2">潜意识感应</span>
+                  <span class="tw-dim tw-dim-w2">涵容力</span>
+                </div>
+                <div class="tw-ability">感应天赋</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 流动箭头 2 -->
+          <div class="tw-flow">
+            <div class="tw-flow-line"></div>
+            <div class="tw-flow-dots">
+              <span class="tw-dot tw-dot-b" style="animation-delay:0.1s"></span>
+              <span class="tw-dot tw-dot-b" style="animation-delay:0.4s"></span>
+              <span class="tw-dot tw-dot-b" style="animation-delay:0.7s"></span>
+            </div>
+            <div class="tw-flow-label">创造性流动</div>
+            <div class="tw-flow-line"></div>
+          </div>
+
+          <!-- 第三个世界 -->
+          <div class="tw-world tw-w3">
+            <div class="tw-world-inner">
+              <div class="tw-left">
+                <span class="tw-num">第三个世界</span>
+                <div class="tw-title">意识心智</div>
+                <div class="tw-desc">带动真实改变的能力——带动来访者神经系统从CRASH走向COACH，让改变真正发生</div>
+              </div>
+              <div class="tw-right">
+                <div class="tw-dim-group">
+                  <span class="tw-dim tw-dim-w3">创造性引导</span>
+                  <span class="tw-dim tw-dim-w3">影响力</span>
+                </div>
+                <div class="tw-ability">转化天赋</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 结果箭头 -->
+          <div class="tw-result-arrow">
+            <div class="tw-result-line"></div>
+            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" style="display:block;margin:0 auto;">
+              <path d="M6 8L0 0H12L6 8Z" fill="#5A4A38" opacity="0.4"/>
+            </svg>
+          </div>
+
+          <!-- COACH / CRASH -->
+          <div class="tw-outcome">
+            <div class="tw-coach">
+              <div class="tw-outcome-label tw-coach-label">COACH</div>
+              <div class="tw-outcome-sub">三个世界流动畅通</div>
+              <div class="tw-outcome-desc">深度催眠工作自然发生<br>来访者真实改变发生</div>
+            </div>
+            <div class="tw-vs">↔</div>
+            <div class="tw-crash">
+              <div class="tw-outcome-label tw-crash-label">CRASH</div>
+              <div class="tw-outcome-sub">三个世界流动堵塞</div>
+              <div class="tw-outcome-desc">执业天花板出现<br>催眠师被带走或推不动</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <p style="margin-top: 24px;">此外，独立维度 <strong>转境</strong> 不归属于任何一个世界，而是决定当三个世界的流动断掉时，催眠师能否重新找到回到COACH的路——这是区分普通催眠师和卓越催眠师的分水岭。</p>
+    </div>
+  </section>
+
+  <!-- 04 测量维度 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">04</span>
+      <span class="section-name">测量维度</span>
+    </div>
+    <div class="section-body">
+      <h2>七个维度</h2>
+      <p>三个主维度各含二级维度，加一个独立维度，共七个测量维度。每个维度从「在你发展催眠天赋的路上，顺畅之处与卡顿之处」两个角度呈现。</p>
+
+      <div class="dim-list">
+
+        <div class="dim-card" style="border-color: var(--world1);">
+          <div class="dim-header">
+            <span class="dim-num">A-01</span>
+            <span class="dim-name">场域感知</span>
+            <span class="dim-world">第一个世界 · 临在</span>
+          </div>
+          <div class="dim-desc">你能否在来访者进门的那一刻，感应到他带来的能量状态——不需要对方开口，你的身体已经在接收信息。</div>
+          <div class="dim-states">
+            <div class="state-box state-smooth">
+              <span class="state-label">顺畅</span>
+              走进咨询室不需要任何技术，你的临在本身就在工作。你能感知来访者还没说出口的状态。
+            </div>
+            <div class="state-box state-stuck">
+              <span class="state-label">卡顿</span>
+              在咨询室里，你有时感到某一部分不完全在——面对某类来访者时，身体会不自觉地收紧。
+            </div>
+          </div>
+        </div>
+
+        <div class="dim-card" style="border-color: var(--world1);">
+          <div class="dim-header">
+            <span class="dim-num">A-02</span>
+            <span class="dim-name">醒觉力</span>
+            <span class="dim-world">第一个世界 · 临在</span>
+          </div>
+          <div class="dim-desc">你能否在完全临在陪伴来访者的同时，始终知道自己在哪里——完全进入他的世界，却不迷失在他的情绪里。</div>
+          <div class="dim-states">
+            <div class="state-box state-smooth">
+              <span class="state-label">顺畅</span>
+              你能同时做到两件事：完全陪伴来访者，并始终清醒地知道——这是他的痛苦，不是我的。
+            </div>
+            <div class="state-box state-stuck">
+              <span class="state-label">卡顿</span>
+              来访者离开之后，他的重量有时跟着你回家。你不确定那是他的情绪还是你的。
+            </div>
+          </div>
+        </div>
+
+        <div class="dim-card" style="border-color: var(--world2);">
+          <div class="dim-header">
+            <span class="dim-num">B-01</span>
+            <span class="dim-name">潜意识感应</span>
+            <span class="dim-world">第二个世界 · 感应</span>
+          </div>
+          <div class="dim-desc">你能否感应到来访者潜意识里真正发生的事——不只是他说的问题，而是那个更深的、连他自己都不知道的部分。</div>
+          <div class="dim-states">
+            <div class="state-box state-smooth">
+              <span class="state-label">顺畅</span>
+              你能感应到来访者没说出口的那部分——那个住在他潜意识里的真实状态。不用他说，你知道。
+            </div>
+            <div class="state-box state-stuck">
+              <span class="state-label">卡顿</span>
+              你能理解来访者说的，但感觉和他真正的内在世界之间总有一层——你在外面，进不去。
+            </div>
+          </div>
+        </div>
+
+        <div class="dim-card" style="border-color: var(--world2);">
+          <div class="dim-header">
+            <span class="dim-num">B-02</span>
+            <span class="dim-name">涵容力</span>
+            <span class="dim-world">第二个世界 · 感应</span>
+          </div>
+          <div class="dim-desc">你的内在容器有多大——来访者带来的痛苦、混乱、阴影，你能接住，不退缩、不评判、不被淹没。容器有多大，来访者能走多深。</div>
+          <div class="dim-states">
+            <div class="state-box state-smooth">
+              <span class="state-label">顺畅</span>
+              不管来访者带来什么——愤怒、崩溃、黑暗——你都能稳稳地在那里。他感受得到你的容器。
+            </div>
+            <div class="state-box state-stuck">
+              <span class="state-label">卡顿</span>
+              高强度个案之后，你需要很长时间才能恢复。某类情绪或议题出现时，你会不自觉地想转方向。
+            </div>
+          </div>
+        </div>
+
+        <div class="dim-card" style="border-color: var(--world3);">
+          <div class="dim-header">
+            <span class="dim-num">C-01</span>
+            <span class="dim-name">创造性引导</span>
+            <span class="dim-world">第三个世界 · 转化</span>
+          </div>
+          <div class="dim-desc">你能否用意象、隐喻、身体语言直接打开来访者的创造性潜意识——让改变不只发生在头脑层面，而是在更深的地方真正松动。</div>
+          <div class="dim-states">
+            <div class="state-box state-smooth">
+              <span class="state-label">顺畅</span>
+              你能自然地用画面、隐喻、身体感知引导来访者——他能跟着你进入一个不同的内在空间。
+            </div>
+            <div class="state-box state-stuck">
+              <span class="state-label">卡顿</span>
+              你知道来访者需要进入更深的地方，但不确定用什么方式推开那扇门——停留在语言和分析层面。
+            </div>
+          </div>
+        </div>
+
+        <div class="dim-card" style="border-color: var(--world3);">
+          <div class="dim-header">
+            <span class="dim-num">C-02</span>
+            <span class="dim-name">影响力</span>
+            <span class="dim-world">第三个世界 · 转化</span>
+          </div>
+          <div class="dim-desc">你的COACH状态能否真正传递给来访者——不是靠技术，是靠你自己的状态带动他的神经系统从锁结走向流动。</div>
+          <div class="dim-states">
+            <div class="state-box state-smooth">
+              <span class="state-label">顺畅</span>
+              来访者在你这里会自然地松动——不只是因为你说了什么，而是因为你在，他的神经系统就开始放松。
+            </div>
+            <div class="state-box state-stuck">
+              <span class="state-label">卡顿</span>
+              你用了正确的技术，来访者也理解了，但那个深层的改变没有发生——你感觉到了那个距离。
+            </div>
+          </div>
+        </div>
+
+        <div class="dim-card" style="border-color: var(--rupture);">
+          <div class="dim-header">
+            <span class="dim-num">D</span>
+            <span class="dim-name">转境</span>
+            <span class="dim-world" style="color: var(--rupture);">独立维度 · 卓越分水岭</span>
+          </div>
+          <div class="dim-desc">当三个世界的流动断掉的那个时刻——来自困难个案的外部触发，或来自自身课题被激活的内部触发——你能否把这个断流本身变成疗愈最深的入口。</div>
+          <div class="dim-states">
+            <div class="state-box state-smooth">
+              <span class="state-label">顺畅</span>
+              卡住的个案在你这里不是障碍，是信息。你的三个世界在压力下依然能重新流动——断流变成入口。
+            </div>
+            <div class="state-box state-stuck">
+              <span class="state-label">卡顿</span>
+              遇到真正的阻抗时，你的神经系统会进入保护模式——用力撑、悄悄回避、僵住，或开始怀疑自己。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 报告结构 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-name">报告结构</span>
+    </div>
+    <div class="section-body">
+      <h2>五模块报告框架</h2>
+      <p>报告是一个完整的叙事，用户读完的感受是：</p>
+      <p><strong>「有人把我在发展催眠天赋路上的状态看得很清楚，然后告诉了我一条真实的出路。」</strong></p>
+
+      <div class="modules-flow">
+
+        <!-- M01 -->
+        <div class="module-card">
+          <div class="module-header">
+            <span class="module-num">MODULE 01</span>
+            <span class="module-title">你的催眠师天赋指数</span>
+            <span class="module-function">被精准看见</span>
+          </div>
+          <div class="module-input">
+            <span class="input-badge">A 临在</span>
+            <span class="input-badge">B 感应</span>
+            <span class="input-badge">C 转化</span>
+            <span class="input-badge">D 转境</span>
+            <span class="input-badge">全维度综合</span>
+          </div>
+          <div class="module-body">
+            一个指数，一段话。不拆解维度，不给类型——只给用户一面镜子，精准映照他当下在发展催眠天赋路上的整体状态。<br><br>
+            六个区间（0-49 蛰伏 / 50-59 萌芽 / 60-69 觉醒 / 70-79 流动 / 80-89 绽放 / 90-100 显化），每个区间精准命名用户的执业感受——不是评价，是描述，让用户感到「被看见」。
+          </div>
+          <div class="hook-box">
+            <span class="hook-label">认知钩子</span>
+            <div class="hook-text">「这个指数衡量的不是你学了多少，而是你天生携带的催眠师能力现在流动了多少。它可以更高——生生不息催眠体系，正是专门为激活这些能力而设计的。」
+              <span class="note">→ 第一次植入「天赋可以被系统激活」的核心认知</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-connector"><span class="module-arrow">↓</span></div>
+
+        <!-- M02 -->
+        <div class="module-card">
+          <div class="module-header">
+            <span class="module-num">MODULE 02</span>
+            <span class="module-title">你的催眠天赋地图</span>
+            <span class="module-function">建立认知框架</span>
+          </div>
+          <div class="module-input">
+            <span class="input-badge">A 临在</span>
+            <span class="input-badge">B 感应</span>
+            <span class="input-badge">C 转化</span>
+            <span class="input-badge">三维度组合呈现</span>
+          </div>
+          <div class="module-body">
+            用三个世界模型图呈现深度催眠工作的本质框架，同时直接映射用户的测评结果——哪个世界在流动，哪个世界有堵塞，一眼可见。以下为<strong>示例结果：临在高 · 感应高 · 转化低</strong>组合的报告呈现。
+          </div>
+
+          <!-- PART 1：三个世界三角形图 -->
+          <div class="tw-triangle-diagram">
+
+            <div class="tw-static-header">
+              <span class="tw-static-eyebrow">优秀催眠师的必备能力 · 三个世界模型</span>
+            </div>
+
+            <div class="tw-triangle-body">
+
+              <!-- SVG 三角形 -->
+              <div class="tw-triangle-svg-wrap">
+                <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" class="tw-triangle-svg">
+
+                  <!-- 主三角形：三条边（闭合 = COACH） -->
+                  <!-- 顶→左下 -->
+                  <line x1="240" y1="55" x2="60" y2="345" stroke="#7A4F1E" stroke-width="2" opacity="0.5"/>
+                  <!-- 左下→右下 -->
+                  <line x1="60" y1="345" x2="420" y2="345" stroke="#1E5C8B" stroke-width="2" opacity="0.5"/>
+                  <!-- 右下→顶 -->
+                  <line x1="420" y1="345" x2="240" y2="55" stroke="#2E6E2E" stroke-width="2" opacity="0.5"/>
+
+                  <!-- 中心文字 -->
+                  <text x="240" y="218" text-anchor="middle" font-size="11" fill="#5A4A38" opacity="0.5" letter-spacing="2" font-family="PingFang SC, Microsoft YaHei, sans-serif">创造性流动</text>
+
+                  <!-- 顶点：第一个世界（金色） -->
+                  <circle cx="240" cy="55" r="38" fill="#F4F1EC" stroke="#7A4F1E" stroke-width="2"/>
+                  <text x="240" y="47" text-anchor="middle" font-size="19" fill="#7A4F1E" font-family="serif">☯</text>
+                  <text x="240" y="67" text-anchor="middle" font-size="9" fill="#7A4F1E" letter-spacing="1" font-family="PingFang SC, Microsoft YaHei, sans-serif">第一个世界</text>
+
+                  <!-- 左下顶点：第二个世界（蓝色） -->
+                  <circle cx="60" cy="345" r="38" fill="#F4F1EC" stroke="#1E5C8B" stroke-width="2"/>
+                  <text x="60" y="337" text-anchor="middle" font-size="19" fill="#1E5C8B" font-family="serif">✦</text>
+                  <text x="60" y="357" text-anchor="middle" font-size="9" fill="#1E5C8B" letter-spacing="1" font-family="PingFang SC, Microsoft YaHei, sans-serif">第二个世界</text>
+
+                  <!-- 右下顶点：第三个世界（绿色） -->
+                  <circle cx="420" cy="345" r="38" fill="#F4F1EC" stroke="#2E6E2E" stroke-width="2"/>
+                  <text x="420" y="337" text-anchor="middle" font-size="19" fill="#2E6E2E" font-family="serif">◎</text>
+                  <text x="420" y="357" text-anchor="middle" font-size="9" fill="#2E6E2E" letter-spacing="1" font-family="PingFang SC, Microsoft YaHei, sans-serif">第三个世界</text>
+
+                  <!-- 边标签 -->
+                  <text x="136" y="188" text-anchor="middle" font-size="9.5" fill="#7A4F1E" opacity="0.7" transform="rotate(-60,136,188)" font-family="PingFang SC, Microsoft YaHei, sans-serif">场域感知 · 醒觉力</text>
+                  <text x="240" y="372" text-anchor="middle" font-size="9.5" fill="#1E5C8B" opacity="0.7" font-family="PingFang SC, Microsoft YaHei, sans-serif">潜意识感应 · 涵容力</text>
+                  <text x="344" y="188" text-anchor="middle" font-size="9.5" fill="#2E6E2E" opacity="0.7" transform="rotate(60,344,188)" font-family="PingFang SC, Microsoft YaHei, sans-serif">创造性引导 · 影响力</text>
+
+                  <!-- COACH标签（三角形内，闭合状态） -->
+                  <text x="240" y="200" text-anchor="middle" font-size="13" fill="#2E6E2E" font-weight="bold" opacity="0.7" letter-spacing="2" font-family="PingFang SC, Microsoft YaHei, sans-serif">COACH</text>
+                  <text x="240" y="218" text-anchor="middle" font-size="9" fill="#2E6E2E" opacity="0.5" letter-spacing="1" font-family="PingFang SC, Microsoft YaHei, sans-serif">三角闭合</text>
+
+                </svg>
+
+                <!-- CRASH 小图：断开的三角形 -->
+                <div class="tw-crash-mini">
+                  <svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" class="tw-crash-svg">
+                    <!-- 左下→顶（完整） -->
+                    <line x1="20" y1="110" x2="80" y2="18" stroke="#8B2E2E" stroke-width="1.5" opacity="0.5"/>
+                    <!-- 顶→右下（完整） -->
+                    <line x1="80" y1="18" x2="140" y2="110" stroke="#8B2E2E" stroke-width="1.5" opacity="0.5"/>
+                    <!-- 左下→右下（断开，虚线） -->
+                    <line x1="20" y1="110" x2="55" y2="110" stroke="#8B2E2E" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4"/>
+                    <line x1="105" y1="110" x2="140" y2="110" stroke="#8B2E2E" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4"/>
+                    <!-- 断开处标记 -->
+                    <text x="80" y="118" text-anchor="middle" font-size="13" fill="#8B2E2E" opacity="0.6" font-family="serif">✕</text>
+                    <!-- 顶点 -->
+                    <circle cx="80" cy="18" r="13" fill="#F4F1EC" stroke="#8B2E2E" stroke-width="1.5" opacity="0.7"/>
+                    <circle cx="20" cy="110" r="13" fill="#F4F1EC" stroke="#8B2E2E" stroke-width="1.5" opacity="0.7"/>
+                    <circle cx="140" cy="110" r="13" fill="#F4F1EC" stroke="#8B2E2E" stroke-width="1.5" opacity="0.7"/>
+                    <!-- CRASH标签 -->
+                    <text x="80" y="75" text-anchor="middle" font-size="11" fill="#8B2E2E" font-weight="bold" opacity="0.7" letter-spacing="1" font-family="PingFang SC, Microsoft YaHei, sans-serif">CRASH</text>
+                    <text x="80" y="90" text-anchor="middle" font-size="8" fill="#8B2E2E" opacity="0.5" letter-spacing="1" font-family="PingFang SC, Microsoft YaHei, sans-serif">三角断开</text>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- 三个世界文字说明（右侧） -->
+              <div class="tw-triangle-legend">
+                <div class="tw-tri-item tw-tri-w1">
+                  <div class="tw-tri-dot" style="background:var(--world1)"></div>
+                  <div class="tw-tri-info">
+                    <div class="tw-tri-name">第一个世界 · 创造性源头</div>
+                    <div class="tw-tri-ability">「你真正在这里」的能力</div>
+                    <div class="tw-tri-desc">灵魂临在——来访者的潜意识在你进门的那一刻就开始感应你</div>
+                  </div>
+                </div>
+                <div class="tw-tri-item tw-tri-w2">
+                  <div class="tw-tri-dot" style="background:var(--world2)"></div>
+                  <div class="tw-tri-info">
+                    <div class="tw-tri-name">第二个世界 · 创造性潜意识</div>
+                    <div class="tw-tri-ability">「感应来访者内在」的能力</div>
+                    <div class="tw-tri-desc">最重要的部分住在来访者的潜意识里，他自己也不知道</div>
+                  </div>
+                </div>
+                <div class="tw-tri-item tw-tri-w3">
+                  <div class="tw-tri-dot" style="background:var(--world3)"></div>
+                  <div class="tw-tri-info">
+                    <div class="tw-tri-name">第三个世界 · 意识心智</div>
+                    <div class="tw-tri-ability">「带动真实改变」的能力</div>
+                    <div class="tw-tri-desc">带动来访者的神经系统从CRASH走向COACH，让改变真正发生</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- PART 2：用户结果（示例：临在高·感应高·转化低） -->
+          <div class="m2-map" style="margin-top:24px;">
+
+            <div class="m2-label-row">
+              <span class="m2-example-tag">示例结果 · 临在高 · 感应高 · 转化低</span>
+            </div>
+
+            <!-- 第一个世界：临在 高 -->
+            <div class="m2-world m2-high">
+              <div class="m2-world-left">
+                <div class="m2-world-meta">
+                  <span class="m2-world-num">第一个世界 · 创造性源头</span>
+                  <span class="m2-status m2-status-high">✦ 顺畅流动</span>
+                </div>
+                <div class="m2-world-name" style="color:var(--world1)">临在天赋</div>
+                <div class="m2-world-result">你走进咨询室，临在本身就在工作。来访者还没开口，你已经感应到他带来的状态——这是你最自然的入口，也是你进入深度工作最快的通道。</div>
+              </div>
+              <div class="m2-world-right">
+                <div class="m2-score-bar">
+                  <div class="m2-score-fill m2-fill-w1" style="width:82%"></div>
+                </div>
+                <div class="m2-score-num" style="color:var(--world1)">82</div>
+                <div class="m2-dims">
+                  <span class="m2-dim" style="background:rgba(122,79,30,0.10);color:var(--world1)">场域感知 ↑</span>
+                  <span class="m2-dim" style="background:rgba(122,79,30,0.10);color:var(--world1)">醒觉力 ↑</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 流动箭头 1：畅通 -->
+            <div class="m2-flow m2-flow-open">
+              <div class="m2-flow-line m2-flow-active"></div>
+              <div class="m2-flow-center">
+                <span class="m2-flow-dot" style="animation-delay:0s;background:var(--world1)"></span>
+                <span class="m2-flow-dot" style="animation-delay:0.25s;background:var(--world2)"></span>
+                <span class="m2-flow-dot" style="animation-delay:0.5s;background:var(--world2)"></span>
+                <span class="m2-flow-text m2-flow-open-text">流动畅通</span>
+              </div>
+              <div class="m2-flow-line m2-flow-active"></div>
+            </div>
+
+            <!-- 第二个世界：感应 高 -->
+            <div class="m2-world m2-high">
+              <div class="m2-world-left">
+                <div class="m2-world-meta">
+                  <span class="m2-world-num">第二个世界 · 创造性潜意识</span>
+                  <span class="m2-status m2-status-high">✦ 顺畅流动</span>
+                </div>
+                <div class="m2-world-name" style="color:var(--world2)">感应天赋</div>
+                <div class="m2-world-result">你天然能感应到来访者没说出口的部分，并且能稳稳接住他带来的一切——他的痛苦、混乱、黑暗，在你这里都有容身之处。这是极少数人天生就有的能力。</div>
+              </div>
+              <div class="m2-world-right">
+                <div class="m2-score-bar">
+                  <div class="m2-score-fill m2-fill-w2" style="width:78%"></div>
+                </div>
+                <div class="m2-score-num" style="color:var(--world2)">78</div>
+                <div class="m2-dims">
+                  <span class="m2-dim" style="background:rgba(30,92,139,0.10);color:var(--world2)">潜意识感应 ↑</span>
+                  <span class="m2-dim" style="background:rgba(30,92,139,0.10);color:var(--world2)">涵容力 ↑</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 流动箭头 2：受阻 -->
+            <div class="m2-flow m2-flow-blocked">
+              <div class="m2-flow-line m2-flow-dim"></div>
+              <div class="m2-flow-center">
+                <span class="m2-block-icon">╳</span>
+                <span class="m2-flow-text m2-flow-blocked-text">流动受阻</span>
+              </div>
+              <div class="m2-flow-line m2-flow-dim"></div>
+            </div>
+
+            <!-- 第三个世界：转化 低 -->
+            <div class="m2-world m2-low">
+              <div class="m2-world-left">
+                <div class="m2-world-meta">
+                  <span class="m2-world-num">第三个世界 · 意识心智</span>
+                  <span class="m2-status m2-status-low">◌ 等待激活</span>
+                </div>
+                <div class="m2-world-name" style="color:var(--muted)">转化天赋</div>
+                <div class="m2-world-result">你感知到了，也接住了——但到了需要带动来访者真正改变的时刻，有一道门还没打开。你能感觉到入口就在那里，但还没找到推开它的方式。这是你现在最近的成长边界。</div>
+              </div>
+              <div class="m2-world-right">
+                <div class="m2-score-bar">
+                  <div class="m2-score-fill m2-fill-low" style="width:41%"></div>
+                </div>
+                <div class="m2-score-num" style="color:var(--muted)">41</div>
+                <div class="m2-dims">
+                  <span class="m2-dim" style="background:rgba(90,74,56,0.08);color:var(--muted)">创造性引导 ↓</span>
+                  <span class="m2-dim" style="background:rgba(90,74,56,0.08);color:var(--muted)">影响力 ↓</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 组合解读 + 类型命名 -->
+            <div class="m2-insight">
+              <div class="m2-insight-label">你的催眠师天赋类型</div>
+              <div class="m2-type-name">「深井型」</div>
+              <div class="m2-insight-text">你是一口深井——来访者愿意把最深的东西放进来，因为他们感受得到你真的在，也感受得到你能接住。进入别人的内在世界，对你来说是自然的，不需要努力。但深井不会自己涌出泉水——你还没有找到让改变从深处涌出来的方式。你能陪来访者走进黑暗，但带他们走出来的那个支点，还在等待被找到。</div>
+            </div>
+
+          </div>
+
+          <div class="hook-box">
+            <span class="hook-label">顿悟钩子</span>
+            <div class="hook-text">「你技术够了，关系也好——但来访者就是到不了那个深度。不是你不够努力，是第三个世界的通道还没有真正打开。当你自己的三个世界同时流动，来访者的三个世界也会开始流动。」
+              <span class="note">→ 命名根本原因。不点课程，只说「这个通道是可以被打开的」——让用户带着这个问题进入模块三</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-connector"><span class="module-arrow">↓</span></div>
+
+        <!-- M03 -->
+        <div class="module-card">
+          <div class="module-header">
+            <span class="module-num">MODULE 03</span>
+            <span class="module-title">你的七维度天赋剖面</span>
+            <span class="module-function">精准看见</span>
+          </div>
+          <div class="module-input">
+            <span class="input-badge">七个维度各自得分</span>
+            <span class="input-badge">高分→顺畅</span>
+            <span class="input-badge">低分→卡顿</span>
+          </div>
+          <div class="module-body">
+            模块二告诉你「地图长什么样」——模块三把地图精细化到每一个维度。七个维度逐一呈现，每个维度给用户三样东西：<strong>这个维度在你执业里的具体表现</strong>、<strong>它顺畅或卡顿的真实感受</strong>、以及<strong>一句指向下一步的话</strong>——不说课程名，只说那个层次需要什么。
+          </div>
+
+          <!-- 七维度剖面示例 -->
+          <div class="m3-demo">
+            <div class="m3-demo-label">示例内容 · 临在高 · 感应高 · 转化低（七维度细化）</div>
+
+            <!-- A-01 场域感知 高 -->
+            <div class="m3-dim-card m3-dim-open">
+              <div class="m3-dim-header">
+                <div class="m3-dim-meta">
+                  <span class="m3-dim-code" style="color:var(--world1)">A-01</span>
+                  <span class="m3-dim-name">场域感知</span>
+                  <span class="m3-dim-world">第一个世界 · 临在</span>
+                </div>
+                <div class="m3-dim-right">
+                  <div class="m3-dim-bar"><div class="m3-dim-fill" style="width:86%;background:var(--world1)"></div></div>
+                  <span class="m3-dim-score" style="color:var(--world1)">86</span>
+                  <span class="m3-dim-tag m3-tag-open">顺畅</span>
+                </div>
+              </div>
+              <div class="m3-dim-body">你走进咨询室，某种感知就已经开始工作了——来访者还没开口，你的身体已经在接收他带来的状态。那种隐隐的紧张，今天格外沉默的重量，或者他说「我很好」但你知道不是——你天生就能接收这些信号。</div>
+              <div class="m3-dim-hook">→ 这个通道已经打开。它是你建立信任关系的速度远快于其他人的根本原因。</div>
+            </div>
+
+            <!-- A-02 醒觉力 高 -->
+            <div class="m3-dim-card m3-dim-open">
+              <div class="m3-dim-header">
+                <div class="m3-dim-meta">
+                  <span class="m3-dim-code" style="color:var(--world1)">A-02</span>
+                  <span class="m3-dim-name">醒觉力</span>
+                  <span class="m3-dim-world">第一个世界 · 临在</span>
+                </div>
+                <div class="m3-dim-right">
+                  <div class="m3-dim-bar"><div class="m3-dim-fill" style="width:79%;background:var(--world1)"></div></div>
+                  <span class="m3-dim-score" style="color:var(--world1)">79</span>
+                  <span class="m3-dim-tag m3-tag-open">顺畅</span>
+                </div>
+              </div>
+              <div class="m3-dim-body">你能在完全陪伴来访者的同时，始终有一部分清醒地知道自己在哪里。进入他的世界，但不会在里面迷失——你陪他走进去，也知道出口在哪里。这让你的陪伴有重量，但不会压垮你自己。</div>
+              <div class="m3-dim-hook">→ 这个能力让你的临在有地基。它和场域感知一起，构成了你最自然的催眠师入口。</div>
+            </div>
+
+            <!-- B-01 潜意识感应 高 -->
+            <div class="m3-dim-card m3-dim-open">
+              <div class="m3-dim-header">
+                <div class="m3-dim-meta">
+                  <span class="m3-dim-code" style="color:var(--world2)">B-01</span>
+                  <span class="m3-dim-name">潜意识感应</span>
+                  <span class="m3-dim-world">第二个世界 · 感应</span>
+                </div>
+                <div class="m3-dim-right">
+                  <div class="m3-dim-bar"><div class="m3-dim-fill" style="width:81%;background:var(--world2)"></div></div>
+                  <span class="m3-dim-score" style="color:var(--world2)">81</span>
+                  <span class="m3-dim-tag m3-tag-open">顺畅</span>
+                </div>
+              </div>
+              <div class="m3-dim-body">你能感应到来访者没有说出口的那部分——那个住在他潜意识里、连他自己都不完全知道的真实状态。有时候你说出一句话，来访者愣了一下说「你怎么知道」。不是靠分析，是靠一种更直接的接收。</div>
+              <div class="m3-dim-hook">→ 这是深度催眠工作最核心的感知能力。它让你能触碰到其他咨询师触碰不到的地方。</div>
+            </div>
+
+            <!-- B-02 涵容力 高 -->
+            <div class="m3-dim-card m3-dim-open">
+              <div class="m3-dim-header">
+                <div class="m3-dim-meta">
+                  <span class="m3-dim-code" style="color:var(--world2)">B-02</span>
+                  <span class="m3-dim-name">涵容力</span>
+                  <span class="m3-dim-world">第二个世界 · 感应</span>
+                </div>
+                <div class="m3-dim-right">
+                  <div class="m3-dim-bar"><div class="m3-dim-fill" style="width:74%;background:var(--world2)"></div></div>
+                  <span class="m3-dim-score" style="color:var(--world2)">74</span>
+                  <span class="m3-dim-tag m3-tag-open">顺畅</span>
+                </div>
+              </div>
+              <div class="m3-dim-body">来访者带来的沉重、黑暗、混乱——在你这里有容身之处。你不会退缩，不会评判，不会试图用「积极的话」快速带走那个重量。你的容器在那里，来访者感受得到，所以他们敢把真正深的东西放进来。</div>
+              <div class="m3-dim-hook">→ 你的容器大小，决定了来访者能在你这里走多深。这个维度和潜意识感应一起，是你最珍贵的执业资产。</div>
+            </div>
+
+            <!-- C-01 创造性引导 低 -->
+            <div class="m3-dim-card m3-dim-blocked">
+              <div class="m3-dim-header">
+                <div class="m3-dim-meta">
+                  <span class="m3-dim-code" style="color:var(--muted)">C-01</span>
+                  <span class="m3-dim-name">创造性引导</span>
+                  <span class="m3-dim-world">第三个世界 · 转化</span>
+                </div>
+                <div class="m3-dim-right">
+                  <div class="m3-dim-bar"><div class="m3-dim-fill" style="width:44%;background:var(--divider)"></div></div>
+                  <span class="m3-dim-score" style="color:var(--muted)">44</span>
+                  <span class="m3-dim-tag m3-tag-blocked">等待激活</span>
+                </div>
+              </div>
+              <div class="m3-dim-body">你能感知到来访者需要进入一个不同的内在空间，但还没找到打开那扇门的方式。意象、隐喻、身体语言——这些工具你有，但在关键时刻，你不确定用哪一个，或者用了但来访者没有跟进来。那个入口就在那里，但你还不知道怎么推开它。</div>
+              <div class="m3-dim-hook" style="border-color:var(--rupture);background:rgba(139,46,46,0.04);">→ 当你能用创造性语言直接打开来访者的潜意识通道，你和来访者之间的改变会从「理解」变成「真实松动」。这一层需要在体验中被训练，不是靠读书。</div>
+            </div>
+
+            <!-- C-02 影响力 低 -->
+            <div class="m3-dim-card m3-dim-blocked">
+              <div class="m3-dim-header">
+                <div class="m3-dim-meta">
+                  <span class="m3-dim-code" style="color:var(--muted)">C-02</span>
+                  <span class="m3-dim-name">影响力</span>
+                  <span class="m3-dim-world">第三个世界 · 转化</span>
+                </div>
+                <div class="m3-dim-right">
+                  <div class="m3-dim-bar"><div class="m3-dim-fill" style="width:38%;background:var(--divider)"></div></div>
+                  <span class="m3-dim-score" style="color:var(--muted)">38</span>
+                  <span class="m3-dim-tag m3-tag-blocked">等待激活</span>
+                </div>
+              </div>
+              <div class="m3-dim-body">你的状态还没有完全变成来访者神经系统的信号。你说了正确的话，用了正确的技术，来访者也在认真听——但那个深层的改变没有发生。不是理解的问题，是你的COACH状态还没有强到足以传递给他，带动他的系统真正松动。</div>
+              <div class="m3-dim-hook" style="border-color:var(--rupture);background:rgba(139,46,46,0.04);">→ 影响力不是个人魅力，是你自己的神经系统流动时对另一个神经系统的带动。这个能力激活之后，你的工作会从「努力帮他改变」变成「你的在场本身就带来改变」。</div>
+            </div>
+
+            <!-- D 转境 中 -->
+            <div class="m3-dim-card" style="background:rgba(139,46,46,0.03);border-left:3px solid var(--rupture);">
+              <div class="m3-dim-header">
+                <div class="m3-dim-meta">
+                  <span class="m3-dim-code" style="color:var(--rupture)">D</span>
+                  <span class="m3-dim-name">转境</span>
+                  <span class="m3-dim-world" style="color:var(--rupture)">独立维度 · 分水岭</span>
+                </div>
+                <div class="m3-dim-right">
+                  <div class="m3-dim-bar"><div class="m3-dim-fill" style="width:52%;background:var(--rupture);opacity:0.6"></div></div>
+                  <span class="m3-dim-score" style="color:var(--rupture)">52</span>
+                  <span class="m3-dim-tag" style="color:var(--rupture);background:rgba(139,46,46,0.08);">成长中</span>
+                </div>
+              </div>
+              <div class="m3-dim-body">你已经有了初步的转境能力——顺利的个案你能稳住，但当真正的阻抗来临，或者来访者的议题触碰到你自己的某个部分，你会感到一种消耗。撑得过去，但代价不小。你能感觉到那个入口在那里，但不是每次都能稳定进入。</div>
+              <div class="m3-dim-hook" style="border-color:var(--rupture);background:rgba(139,46,46,0.04);">→ 转境是卓越催眠师和普通催眠师的真正分水岭。它需要在神经系统层面被工作到——不是靠更多技术或经验，是靠直接在更深的地方训练。（模块四将详细展开）</div>
+            </div>
+
+          </div>
+
+          <div class="hook-box">
+            <span class="hook-label">精准钩子逻辑</span>
+            <div class="hook-text">
+              七个维度各自的钩子语言遵循同一个原则：<strong>顺畅的维度——肯定它，命名它的价值，告诉用户这是他进入深度工作最快的入口；卡顿的维度——不说你缺少它，说它还在等待被激活，并且描述激活之后会发生什么改变。</strong><br><br>
+              每个维度的钩子只指向「那个层次需要什么样的训练」——不点课程名称。用户在七个维度里积累的「原来如此」，到模块五才汇成「我知道下一步了」。
+              <span class="note">→ 隐性课程线：模块三的七个钩子是铺垫，模块五才是出口</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-connector"><span class="module-arrow">↓</span></div>
+
+        <!-- M04 -->
+        <div class="module-card rupture">
+          <div class="module-header">
+            <span class="module-num">MODULE 04</span>
+            <span class="module-title">流动与断流</span>
+            <span class="module-function">触动</span>
+          </div>
+          <div class="module-input">
+            <span class="input-badge" style="border-color:rgba(139,46,46,0.4);color:var(--rupture);background:rgba(139,46,46,0.07);">D 转境 · 唯一输入</span>
+            <span class="input-badge" style="border-color:rgba(139,46,46,0.4);color:var(--rupture);background:rgba(139,46,46,0.07);">类型组合</span>
+          </div>
+
+          <div class="module-body">
+            模块三呈现的是<strong>静态天赋地图</strong>——你在每个世界里的天然状态。但静态地图有一个盲区：它没有告诉你，当你真正坐在来访者面前、压力来了的时候，这张地图会发生什么。<br><br>
+            模块四回答的正是这个问题：<strong>当执业压力出现，你的流动会在哪里断掉——你的断流模式是什么，它在执业里怎么表现，它带来什么影响。</strong>
+          </div>
+
+          <!-- 流动与断流模型图 -->
+          <div class="fd-model">
+            <div class="fd-triggers">
+              <div class="fd-trigger fd-external">
+                <div class="fd-trigger-icon">⚡</div>
+                <div class="fd-trigger-label">外部触发</div>
+                <div class="fd-trigger-desc">困难个案<br>来访者阻抗</div>
+                <div class="fd-trigger-sub">定向反应被激活</div>
+              </div>
+              <div class="fd-trigger-gap"></div>
+              <div class="fd-trigger fd-internal">
+                <div class="fd-trigger-icon">🌀</div>
+                <div class="fd-trigger-label">内部触发</div>
+                <div class="fd-trigger-desc">自身课题<br>被来访者激活</div>
+                <div class="fd-trigger-sub">神经肌肉锁结唤醒</div>
+              </div>
+            </div>
+            <div class="fd-converge">
+              <svg width="100%" height="48" viewBox="0 0 400 48" preserveAspectRatio="none">
+                <path d="M80 0 L200 48" stroke="#8B2E2E" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+                <path d="M320 0 L200 48" stroke="#8B2E2E" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="fd-crash-node">
+              <div class="fd-crash-title">CRASH</div>
+              <div class="fd-crash-sub">三个世界流动断掉</div>
+              <div class="fd-crash-desc">当催眠师进入CRASH<br>无法帮来访者走出CRASH</div>
+            </div>
+            <div class="fd-down-arrow">
+              <div class="fd-down-line"></div>
+              <div class="fd-down-label">转境天赋介入</div>
+              <div class="fd-down-line"></div>
+            </div>
+            <div class="fd-diverge">
+              <svg width="100%" height="48" viewBox="0 0 400 48" preserveAspectRatio="none">
+                <path d="M200 0 L80 48" stroke="#2E6E2E" stroke-width="1.5" opacity="0.5"/>
+                <path d="M200 0 L320 48" stroke="#8B2E2E" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="fd-outcomes">
+              <div class="fd-outcome fd-flow">
+                <div class="fd-outcome-icon">✦</div>
+                <div class="fd-outcome-label">重新流动</div>
+                <div class="fd-outcome-state">COACH</div>
+                <div class="fd-outcome-desc">断流成为<br>疗愈的入口<br>深度工作继续</div>
+              </div>
+              <div class="fd-outcome-gap"></div>
+              <div class="fd-outcome fd-stuck">
+                <div class="fd-outcome-icon">✕</div>
+                <div class="fd-outcome-label">持续CRASH</div>
+                <div class="fd-outcome-state">天花板加厚</div>
+                <div class="fd-outcome-desc">被带走<br>推不动<br>消耗殆尽</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 断流模式详解：示例「深井型·沉入模式」 -->
+          <div class="rupture-detail">
+            <div class="rupture-detail-label">示例 · 深井型（A高·B高·C低）的断流模式</div>
+
+            <!-- 模式命名 -->
+            <div class="rd-mode-name">
+              <span class="rd-mode-icon">◈</span>
+              <span class="rd-mode-title">沉入模式</span>
+              <span class="rd-mode-sub">你进去了，但找不到支点出来</span>
+            </div>
+
+            <!-- 模式来源 -->
+            <div class="rd-section">
+              <div class="rd-section-label">断流来源</div>
+              <div class="rd-section-text">你的感应力让你能深度进入来访者的世界——这是你最珍贵的天赋。但当那个世界里有什么太重、太黑、太熟悉的东西，你的神经系统会悄悄启动一个保护机制。不是你决定的，是你的神经系统替你决定的：沉进去，但找不到出来的支点。你开始用陪伴填补转化的空白，而来访者也感受得到——你在那里，但没有在带他走出来。</div>
+            </div>
+
+            <!-- 执业表现 -->
+            <div class="rd-section">
+              <div class="rd-section-label">执业中的表现</div>
+              <div class="rd-section-text">某个session里，来访者说了一句话，你突然感到一种非常熟悉的重量。你跟着他走进去了——越来越深，越来越沉。等你回过神来，你们已经在一个很深的地方，但你不确定怎么带他出来，也不确定自己有没有完全出来。Session结束后，你需要一段时间才能从那个重量里走出来。</div>
+            </div>
+
+            <!-- 影响：优点+缺点 -->
+            <div class="rd-impact">
+              <div class="rd-impact-box rd-pro">
+                <div class="rd-impact-label">这个模式给你带来的</div>
+                <div class="rd-impact-item">
+                  <span class="rd-impact-dot rd-pro-dot"></span>
+                  <span>来访者愿意把从没对任何人说过的部分带到你面前——因为他们感受得到你真的在，也感受得到你能接住</span>
+                </div>
+                <div class="rd-impact-item">
+                  <span class="rd-impact-dot rd-pro-dot"></span>
+                  <span>你建立深度关系的速度，是很多催眠师用十年也到不了的</span>
+                </div>
+                <div class="rd-impact-item">
+                  <span class="rd-impact-dot rd-pro-dot"></span>
+                  <span>来访者在你这里感到真实的被看见——这种关系本身就有疗愈的力量</span>
+                </div>
+              </div>
+              <div class="rd-impact-box rd-con">
+                <div class="rd-impact-label">这个模式限制了你的</div>
+                <div class="rd-impact-item">
+                  <span class="rd-impact-dot rd-con-dot"></span>
+                  <span>你能陪他们走进黑暗，但还没找到带他们走出来的方式——个案深度有了，改变的动力还不足</span>
+                </div>
+                <div class="rd-impact-item">
+                  <span class="rd-impact-dot rd-con-dot"></span>
+                  <span>高强度工作后你需要大量时间恢复——沉入模式让你在不知不觉中承担了来访者的重量</span>
+                </div>
+                <div class="rd-impact-item">
+                  <span class="rd-impact-dot rd-con-dot"></span>
+                  <span>你自己也不确定，那个session到底发生了什么——缺少对转化时刻的掌控感</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="hook-box" style="margin-top:16px;">
+            <span class="hook-label">精准钩子（双版本）</span>
+            <div class="hook-text">
+              <strong>转境顺畅：</strong>「你已经能在断流时刻重新找到支点。系统训练能让这个能力在最极端的个案面前也稳定存在——不是靠意志力撑，是在神经系统层面真正扎根。」<br><br>
+              <strong>转境卡顿：</strong>「这个断流模式不是性格问题，不是经验不够——它在你的神经系统里，需要在更深的地方被工作到。工作十年的咨询师，在这个时刻的反应可能和刚入行时一模一样。这正是生生不息催眠体系最核心的训练所在。」
+              <span class="note">→ 制造「原来如此」的顿悟感，指向课程最核心的价值</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module-connector"><span class="module-arrow">↓</span></div>
+
+        <!-- M05 -->
+        <div class="module-card">
+          <div class="module-header">
+            <span class="module-num">MODULE 05</span>
+            <span class="module-title">你的催眠天赋激活路径</span>
+            <span class="module-function">行动 · 销转出口</span>
+          </div>
+          <div class="module-input">
+            <span class="input-badge">模块一指数区间</span>
+            <span class="input-badge">类型组合</span>
+            <span class="input-badge">最卡顿维度</span>
+          </div>
+          <div class="module-body">
+            前四个模块，用户已经看见了自己的天赋地图、七维度剖面、断流模式。模块五做一件事：<strong>把所有这些看见，收束成一条清晰的下一步路径</strong>。根据指数区间，告诉用户：你现在的状态，对应的是哪个起点，以及这个起点能给你什么。
+          </div>
+
+          <!-- 五阶路径 × 指数区间 -->
+          <div class="m5-paths">
+
+            <div class="m5-path">
+              <div class="m5-path-index">0 – 49 · 天赋蛰伏</div>
+              <div class="m5-path-body">
+                <div class="m5-path-need">你需要的是：<strong>第一次真实体验到三个世界流动是什么感觉</strong></div>
+                <div class="m5-path-desc">不是读懂它，是让你的神经系统第一次知道COACH是什么。当你的身体体验到那个流动，你才知道你在朝什么方向走——这是一切的起点，也是最重要的一步。</div>
+                <div class="m5-path-stage">
+                  <span class="m5-stage-label">从这里开始</span>
+                  <span class="m5-stage-name">一阶 · 催眠基础理论 · COACH场域</span>
+                  <span class="m5-stage-desc">让你的神经系统第一次体验临在与流动——不是理解，是感受</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="m5-path">
+              <div class="m5-path-index">50 – 69 · 天赋萌芽/觉醒</div>
+              <div class="m5-path-body">
+                <div class="m5-path-need">你需要的是：<strong>把偶然出现的流动，变成可以随时召唤的状态</strong></div>
+                <div class="m5-path-desc">你已经有过那个时刻——和来访者之间什么东西打开了。但你还不能随时复现它。现在需要的是建立一套和潜意识对话的稳定通道，让流动从偶发变成可召唤。</div>
+                <div class="m5-path-stage">
+                  <span class="m5-stage-label">从这里开始</span>
+                  <span class="m5-stage-name">一阶 + 二阶 · 七步骤 · 三种原型能量</span>
+                  <span class="m5-stage-desc">建立与潜意识的稳定对话通道，让感应力和临在同步生长</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="m5-path">
+              <div class="m5-path-index">70 – 79 · 天赋流动</div>
+              <div class="m5-path-body">
+                <div class="m5-path-need">你需要的是：<strong>找到第三个世界的入口，把感知到的转化为真实的改变</strong></div>
+                <div class="m5-path-desc">你能进入来访者的世界，也能接住他们带来的东西——但带动改变的那扇门还没打开。你现在的卡点不是感知，是转化。你需要的不是更多技术，是让自己的状态本身变成来访者神经系统的信号。</div>
+                <div class="m5-path-stage">
+                  <span class="m5-stage-label">最值得投入的</span>
+                  <span class="m5-stage-name">三阶 · 关系技术 · 症状转化</span>
+                  <span class="m5-stage-desc">在真实的关系场域中训练感应和转化的同步——进得去，也带得出来</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="m5-path">
+              <div class="m5-path-index">80 – 89 · 天赋绽放</div>
+              <div class="m5-path-body">
+                <div class="m5-path-need">你需要的是：<strong>在最极端的个案面前，让流动仍然稳定</strong></div>
+                <div class="m5-path-desc">你已经在深度工作了。来访者感受得到你的临在，你也能在关键时刻进入更深的层面。现在的成长边界是：那些最困难的个案、最深的创伤、最复杂的阻抗——以及你自己的断流模式。你需要的是把这个深度在神经系统层面真正稳定下来。</div>
+                <div class="m5-path-stage">
+                  <span class="m5-stage-label">最值得投入的</span>
+                  <span class="m5-stage-name">四阶 · 高级助人技巧 · 断流训练</span>
+                  <span class="m5-stage-desc">系统训练转境天赋——让断流时刻变成疗愈最深的入口，而不是天花板</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="m5-path">
+              <div class="m5-path-index">90 – 100 · 天赋显化</div>
+              <div class="m5-path-body">
+                <div class="m5-path-need">你需要的是：<strong>让你的深度成为可传授的体系</strong></div>
+                <div class="m5-path-desc">你的催眠师天赋已经高度激活。你能进入来访者的世界，能接住他们，也能带动真实的改变。现在的问题不是你自己能走多深，而是：这个深度能不能被传递，能不能在最极端的个案面前持续稳定，能不能成为你执业体系的核心。</div>
+                <div class="m5-path-stage">
+                  <span class="m5-stage-label">最值得投入的</span>
+                  <span class="m5-stage-name">五阶 · 个案实战 · 全维度整合</span>
+                  <span class="m5-stage-desc">在真实个案里把所有天赋整合——从「我能做到」到「我能稳定做到，也能教别人做到」</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 30秒练习 + 行动钩子 -->
+          <div class="m5-action">
+            <div class="m5-action-label">在看完报告之前，做一件事</div>
+            <div class="m5-action-desc">把手放在胸口，深吸一口气，然后慢慢呼出来。感受脚踩在地上的重量。问自己一个问题：<em>「如果我的催眠师天赋完全激活了，我的工作会是什么样的？」</em><br><br>不用分析，只是感受那个画面在你身体里的感觉。——你刚才感受到的，就是你的天赋在说话。</div>
+          </div>
+
+          <div class="hook-box">
+            <span class="hook-label">行动钩子 · 课程销转出口</span>
+            <div class="hook-text">「你现在看到的这条路，不是凭空想象的——它是从你的天赋地图、七维度剖面、断流模式里推导出来的。你已经有了起点，知道了方向，也感受到了天赋真实存在的证据。下一步，是找到那套能帮你系统走完这条路的方法。」
+              <span class="note">→ 这里才是第一次明确指向课程的出口。企业微信引导在此处。前四个模块的所有铺垫，都在为这一刻服务。</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 销转逻辑 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">06</span>
+      <span class="section-name">销转逻辑</span>
+    </div>
+    <div class="section-body">
+      <h2>让所有人都想激活催眠天赋的五个钩子</h2>
+      <p>五个钩子回答五个不同的隐性问题，层层递进。用户到模块五添加微信时，<strong>不是被说服的，是自己走过来的。</strong></p>
+
+      <div class="hooks-grid">
+        <div class="hook-card">
+          <span class="hook-card-num">HOOK 01 · 认知钩子</span>
+          <div class="hook-card-q">「这个测评说的是真的吗？」</div>
+          <div class="hook-card-a">用指数精准命名用户当下的执业状态，建立可信度——不是评分，是镜子</div>
+        </div>
+        <div class="hook-card">
+          <span class="hook-card-num">HOOK 02 · 顿悟钩子</span>
+          <div class="hook-card-q">「为什么我技术够了还到不了那个深度？」</div>
+          <div class="hook-card-a">三个世界模型让用户第一次看见：深度工作不是技术问题，是内在通道的打通程度</div>
+        </div>
+        <div class="hook-card">
+          <span class="hook-card-num">HOOK 03 · 精准钩子</span>
+          <div class="hook-card-q">「我在发展催眠天赋的路上，卡在哪里？」</div>
+          <div class="hook-card-a">三层状态呈现精准命名顺畅与卡顿，用户在这里感到「原来如此」</div>
+        </div>
+        <div class="hook-card">
+          <span class="hook-card-num">HOOK 04 · 触动钩子</span>
+          <div class="hook-card-q">「那个让我推不动或被带走的时刻，是什么？」</div>
+          <div class="hook-card-a">流动与断流模块精准描述执业中最真实的感受——外部触发与内部触发，用户对号入座</div>
+        </div>
+        <div class="hook-card" style="grid-column: 1 / -1;">
+          <span class="hook-card-num">HOOK 05 · 行动钩子</span>
+          <div class="hook-card-q">「我现在能做什么？下一步往哪里走？」</div>
+          <div class="hook-card-a">30秒COACH状态练习让用户亲身体验三个世界流动，带着真实的身体感受迈出第一步——定制成长路径给出精准方向</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 课程映射 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">07</span>
+      <span class="section-name">课程映射</span>
+    </div>
+    <div class="section-body">
+      <h2>隐性课程线：钩子如何从模块一走到模块五</h2>
+      <p>课程不是在每个模块里直接推销的——而是通过一条<strong>隐性的递进逻辑</strong>，让用户在五个模块里逐渐积累「我需要这个」的感受，到模块五才汇成「我知道去哪里了」的行动。</p>
+
+      <div class="course-map">
+        <div class="course-row">
+          <div class="course-stage"><span class="stage-num">模块一</span></div>
+          <div class="course-content">
+            <div class="course-title">钩子：它可以更高</div>
+            <div class="course-desc">指数命名用户当下状态——不提课程，只说「你的天赋激活了这么多，还有更多空间」。种下好奇心，不推销。</div>
+          </div>
+          <div class="course-dim">
+            <span class="course-dim-label">课程感受</span>
+            <div class="course-dim-value">「原来我可以<br>更激活」</div>
+          </div>
+        </div>
+        <div class="course-row">
+          <div class="course-stage"><span class="stage-num">模块二</span></div>
+          <div class="course-content">
+            <div class="course-title">钩子：这个通道是可以被打开的</div>
+            <div class="course-desc">三个世界模型 + 类型命名。每层结尾只说「这个层次需要什么样的训练」——不点课程名，建立「有解法」的认知。</div>
+          </div>
+          <div class="course-dim">
+            <span class="course-dim-label">课程感受</span>
+            <div class="course-dim-value">「原来有方法<br>可以打开它」</div>
+          </div>
+        </div>
+        <div class="course-row">
+          <div class="course-stage"><span class="stage-num">模块三</span></div>
+          <div class="course-content">
+            <div class="course-title">钩子：激活之后会发生什么</div>
+            <div class="course-desc">七维度剖面。顺畅维度说「这是你的入口」，卡顿维度说「激活之后你的工作会发生这样的改变」——用户开始想象激活后的状态。</div>
+          </div>
+          <div class="course-dim">
+            <span class="course-dim-label">课程感受</span>
+            <div class="course-dim-value">「我想要那个<br>激活后的状态」</div>
+          </div>
+        </div>
+        <div class="course-row">
+          <div class="course-stage"><span class="stage-num">模块四</span></div>
+          <div class="course-content">
+            <div class="course-title">钩子：第一次明确指向——这个需要在神经系统层面被工作到</div>
+            <div class="course-desc">断流模式 + 优缺点分析。这里第一次说出「生生不息催眠体系」——不是推销，是回答「为什么是这套方法而不是其他的」。</div>
+          </div>
+          <div class="course-dim">
+            <span class="course-dim-label">课程感受</span>
+            <div class="course-dim-value">「这就是我<br>一直找的方法」</div>
+          </div>
+        </div>
+        <div class="course-row" style="border-left: 3px solid var(--gold);">
+          <div class="course-stage" style="background:rgba(122,79,30,0.08);"><span class="stage-num" style="color:var(--gold)">模块五</span></div>
+          <div class="course-content" style="background:rgba(122,79,30,0.04);">
+            <div class="course-title" style="color:var(--gold)">销转出口：你的第一步是X，对应的是这一阶</div>
+            <div class="course-desc">根据指数区间精准对应五阶课程入口。用户第一次看到课程的具体名称，但此时他们已经在心里准备好了——是自己走过来的，不是被推来的。</div>
+          </div>
+          <div class="course-dim" style="background:rgba(122,79,30,0.04);">
+            <span class="course-dim-label" style="color:var(--gold)">核心动作</span>
+            <div class="course-dim-value" style="color:var(--gold-dim)">添加企业微信<br>进入转化路径</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top:20px; font-size:14px; color:var(--muted); line-height:1.8;">课程钩子的核心原则：<strong>前四个模块只建立感受，不点名称；模块五才是真正的出口。</strong>用户到这里添加微信时，已经经历了完整的认知→顿悟→精准→触动→行动的旅程——他知道自己为什么在这里。</p>
+    </div>
+  </section>
+
+  <!-- 08 叙事弧线 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">08</span>
+      <span class="section-name">叙事弧线</span>
+    </div>
+    <div class="section-body">
+      <h2>报告的完整叙事</h2>
+      <p>五个模块形成一条完整的情感弧线——用户不是在接收信息，而是在经历一段旅程。</p>
+
+      <div class="arc-flow">
+        <div class="arc-step">
+          <div class="arc-module">
+            <div class="arc-mod-num">MODULE 01</div>
+            <div class="arc-mod-name">天赋指数</div>
+          </div>
+          <div class="arc-content">
+            <div class="arc-desc">你在发展催眠天赋的路上，整体流动了多少——有人精准看见了你现在的位置</div>
+            <span class="arc-emotion">被看见</span>
+          </div>
+        </div>
+        <div class="arc-connector"><span class="arc-arrow">↓</span></div>
+        <div class="arc-step">
+          <div class="arc-module">
+            <div class="arc-mod-num">MODULE 02</div>
+            <div class="arc-mod-name">天赋地图</div>
+          </div>
+          <div class="arc-content">
+            <div class="arc-desc">深度催眠工作的地图长什么样——三个世界，这才是真正需要打通的东西</div>
+            <span class="arc-emotion">认知重构</span>
+          </div>
+        </div>
+        <div class="arc-connector"><span class="arc-arrow">↓</span></div>
+        <div class="arc-step">
+          <div class="arc-module">
+            <div class="arc-mod-num">MODULE 03</div>
+            <div class="arc-mod-name">三层状态</div>
+          </div>
+          <div class="arc-content">
+            <div class="arc-desc">你在这张地图上的位置——哪里是顺畅的，哪里是卡住的，原来如此</div>
+            <span class="arc-emotion">顿悟</span>
+          </div>
+        </div>
+        <div class="arc-connector"><span class="arc-arrow">↓</span></div>
+        <div class="arc-step">
+          <div class="arc-module">
+            <div class="arc-mod-num">MODULE 04</div>
+            <div class="arc-mod-name">流动与断流</div>
+          </div>
+          <div class="arc-content">
+            <div class="arc-desc">那个让三个世界流动断掉的时刻——这就是我在执业里真实经历的事</div>
+            <span class="arc-emotion">触动</span>
+          </div>
+        </div>
+        <div class="arc-connector"><span class="arc-arrow">↓</span></div>
+        <div class="arc-step">
+          <div class="arc-module">
+            <div class="arc-mod-num">MODULE 05</div>
+            <div class="arc-mod-name">激活路径</div>
+          </div>
+          <div class="arc-content">
+            <div class="arc-desc">从你现在的位置，下一步往哪里走——顺畅是入口，卡顿是成长边界，我知道了</div>
+            <span class="arc-emotion">行动</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 差异化 -->
+  <section class="section">
+    <div class="section-label">
+      <span class="section-num">09</span>
+      <span class="section-name">差异化</span>
+    </div>
+    <div class="section-body">
+      <h2>与原型测评的差异化</h2>
+      <p>两套测评共用同一套生生不息催眠底层理论，但定位、受众、叙事主线完全不同，形成互补的引流矩阵。</p>
+
+      <table class="diff-table">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>潜意识原型测评</th>
+            <th>催眠师天赋测评</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>核心问题</td>
+            <td>我为什么过不好？</td>
+            <td><strong>我的催眠师天赋激活了多少？</strong></td>
+          </tr>
+          <tr>
+            <td>目标用户</td>
+            <td>普通大众 · 心理成长爱好者</td>
+            <td><strong>有执业基础的咨询师 · 助人工作者</strong></td>
+          </tr>
+          <tr>
+            <td>叙事主线</td>
+            <td>你的能量被锁住了</td>
+            <td><strong>你的催眠天赋，在发展路上哪里顺畅哪里卡顿</strong></td>
+          </tr>
+          <tr>
+            <td>理论框架</td>
+            <td>三种原型能量 + COACH/CRASH</td>
+            <td><strong>三个世界/三重心智 + 流动与断流</strong></td>
+          </tr>
+          <tr>
+            <td>核心钩子</td>
+            <td>锁住你的是身体，催眠直接和身体对话</td>
+            <td><strong>当你进入CRASH，无法帮来访者走出CRASH</strong></td>
+          </tr>
+          <tr>
+            <td>用户感受</td>
+            <td>我的能量状态有名字了</td>
+            <td><strong>原来我天生就有，原来我的天花板在这里</strong></td>
+          </tr>
+          <tr>
+            <td>销转入口</td>
+            <td>解锁自己，改变生活</td>
+            <td><strong>激活执业天赋，突破深度工作的天花板</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-text">
+      催眠师天赋测评 · 立项展示文档<br>
+      基于吉利根生生不息催眠体系 · 三个世界/三重心智模型
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
