@@ -694,7 +694,188 @@
   }
 
   /* ── RESPONSIVE ── */
+  /* ── HYPNOSIS MODEL ── */
+  .hypno-model {
+    margin-top: 28px;
+    border: 1px solid var(--divider);
+    background: var(--bg-card);
+    padding: 28px 28px 20px;
+  }
+
+  .hypno-model-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .hypno-model-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .hypno-cols {
+    display: grid;
+    grid-template-columns: 1fr 48px 1fr 48px 1fr;
+    gap: 0;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .hypno-col {
+    padding: 20px 16px;
+    text-align: center;
+    border-radius: 2px;
+  }
+
+  .hypno-col-left  { background: rgba(107,63,26,0.05); border: 1px solid rgba(107,63,26,0.15); }
+  .hypno-col-mid   { background: rgba(155,46,36,0.05); border: 1px solid rgba(155,46,36,0.2); }
+  .hypno-col-right { background: rgba(45,110,32,0.05); border: 1px solid rgba(45,110,32,0.2); }
+
+  .hypno-col-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .hypno-col-left  .hypno-col-label { color: var(--gold); }
+  .hypno-col-mid   .hypno-col-label { color: var(--rose); }
+  .hypno-col-right .hypno-col-label { color: var(--playful); }
+
+  .hypno-col-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+  }
+
+  .hypno-energies {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .hypno-e {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 2px;
+  }
+
+  .hypno-e.tender  { background: rgba(30,106,133,0.10); color: var(--tender); }
+  .hypno-e.fierce  { background: rgba(155,46,36,0.10);  color: var(--rose); }
+  .hypno-e.playful { background: rgba(45,110,32,0.10);  color: var(--playful); }
+
+  .hypno-col-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .hypno-lock-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .hypno-lock-item {
+    font-size: 12px;
+    color: var(--rose);
+    background: rgba(155,46,36,0.07);
+    padding: 5px 10px;
+    font-weight: 400;
+  }
+
+  .hypno-methods {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .hypno-method-fail {
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(0,0,0,0.04);
+    padding: 3px 8px;
+    border: 1px solid var(--divider);
+    text-decoration: line-through;
+  }
+
+  .hypno-hypno-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .hypno-hypno-item {
+    font-size: 12px;
+    color: var(--playful);
+    background: rgba(45,110,32,0.07);
+    padding: 5px 10px;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  .hypno-arrow-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 4px;
+  }
+
+  .hypno-arrow {
+    font-size: 22px;
+    color: var(--gold-dim);
+    line-height: 1;
+  }
+
+  .hypno-arrow-right { color: var(--playful); }
+
+  .hypno-arrow-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+  }
+
+  .hypno-arrow-label.top { color: var(--rose); font-weight: 700; }
+  .hypno-arrow-label.top + .hypno-arrow + .hypno-arrow-label { }
+  .hypno-arrow-wrap:last-of-type .hypno-arrow-label.top { color: var(--playful); }
+
+  .hypno-footnote {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    border-top: 1px solid var(--divider);
+    padding-top: 16px;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
   @media (max-width: 700px) {
+    .hypno-cols {
+      grid-template-columns: 1fr;
+    }
+    .hypno-arrow-wrap {
+      flex-direction: row;
+      padding: 8px 0;
+    }
+    .hypno-arrow { transform: rotate(90deg); }
     .section {
       grid-template-columns: 1fr;
       gap: 20px 0;
@@ -807,6 +988,7 @@
   <div class="section-body">
     <h2>测评测什么</h2>
     <p>基于吉利根生生不息催眠体系，提取三个核心测量维度。三个维度是<strong>递进关系</strong>，不是并列关系。</p>
+    <p>测评的底层逻辑来自催眠的核心发现：<strong>每个人天生携带三种原型能量</strong>，但在成长过程中，这些能量可能被压制、扭曲，或锁结在身体里无法流动。测评帮用户看见自己的能量状态，报告里的模型图会解释这条逻辑链。</p>
 
     <div class="energy-trio">
       <div class="energy-card tender">
@@ -842,7 +1024,7 @@
           <span class="dim-title">原型动力</span>
         </div>
         <div class="dim-question">「你的能量是自然流动出来的，还是靠紧绷驱动的？」</div>
-        <div class="dim-desc">测量能量外化的方式。有能量，不代表能用出来——用的方式，决定了你是在创造还是在消耗。</div>
+        <div class="dim-desc">测量能量外化的方式。有能量，不代表能用出来——用的方式，决定了你是在创造还是在消耗。这正是报告模块一模型图中「COACH创造性流动」与「CRASH神经肌肉锁结」的测量依据。</div>
         <div class="dim-versus">
           <span class="dim-vs-a">气脉顺畅 · 创造性流动 COACH</span>
           <span class="dim-vs-sep">vs</span>
@@ -893,42 +1075,22 @@
 
       <div class="type-card">
         <div class="type-badges">
-          <span class="badge on-tender">温柔✓</span>
-          <span class="badge on-fierce">勇猛✓</span>
-          <span class="badge off">顽皮✗</span>
-        </div>
-        <div class="type-name">行走的山</div>
-        <div class="type-desc">厚重、稳定、有力，能承载很多。有温柔有力量，但失去了轻盈——你把生命过得很认真，认真到忘了它还可以跳舞。</div>
-      </div>
-
-      <div class="type-card">
-        <div class="type-badges">
-          <span class="badge on-tender">温柔✓</span>
-          <span class="badge off">勇猛✗</span>
-          <span class="badge on-playful">顽皮✓</span>
-        </div>
-        <div class="type-name">流动的玻璃心</div>
-        <div class="type-desc">有温柔有创意，但缺少守护边界的力量。你的温柔容易变成付出不止，你的顽皮容易变成逃避。</div>
-      </div>
-
-      <div class="type-card">
-        <div class="type-badges">
-          <span class="badge on-tender">温柔✓</span>
-          <span class="badge off">勇猛✗</span>
-          <span class="badge off">顽皮✗</span>
-        </div>
-        <div class="type-name">无边的湖</div>
-        <div class="type-desc">平静、接纳、能倒映一切。你心里装得下别人，善良深厚。但没有岸，水就没有方向——你给出了一切，却不知道从哪里补充自己。</div>
-      </div>
-
-      <div class="type-card">
-        <div class="type-badges">
           <span class="badge off">温柔✗</span>
           <span class="badge on-fierce">勇猛✓</span>
           <span class="badge on-playful">顽皮✓</span>
         </div>
         <div class="type-name">盔甲里的自由灵魂</div>
         <div class="type-desc">有力量有创意，但缺少连接他人的柔软。你有很多能量，却不太知道怎么让别人真正靠近你。</div>
+      </div>
+
+      <div class="type-card">
+        <div class="type-badges">
+          <span class="badge on-tender">温柔✓</span>
+          <span class="badge on-fierce">勇猛✓</span>
+          <span class="badge off">顽皮✗</span>
+        </div>
+        <div class="type-name">行走的山</div>
+        <div class="type-desc">厚重、稳定、有力，能承载很多。有温柔有力量，但失去了轻盈——你把生命过得很认真，认真到忘了它还可以跳舞。</div>
       </div>
 
       <div class="type-card">
@@ -943,12 +1105,32 @@
 
       <div class="type-card">
         <div class="type-badges">
+          <span class="badge on-tender">温柔✓</span>
+          <span class="badge off">勇猛✗</span>
+          <span class="badge on-playful">顽皮✓</span>
+        </div>
+        <div class="type-name">流动的玻璃心</div>
+        <div class="type-desc">有温柔有创意，但缺少守护边界的力量。你的温柔容易变成付出不止，你的顽皮容易变成逃避。</div>
+      </div>
+
+      <div class="type-card">
+        <div class="type-badges">
           <span class="badge off">温柔✗</span>
           <span class="badge off">勇猛✗</span>
           <span class="badge on-playful">顽皮✓</span>
         </div>
         <div class="type-name">永远在逃跑的彼得潘</div>
         <div class="type-desc">你有让生活充满色彩的能力，但没有温柔和勇猛的支撑，顽皮有时候是一种逃跑——你飞得很高，但还没有找到落地的方式。</div>
+      </div>
+
+      <div class="type-card">
+        <div class="type-badges">
+          <span class="badge on-tender">温柔✓</span>
+          <span class="badge off">勇猛✗</span>
+          <span class="badge off">顽皮✗</span>
+        </div>
+        <div class="type-name">无边的湖</div>
+        <div class="type-desc">平静、接纳、能倒映一切。你心里装得下别人，善良深厚。但没有岸，水就没有方向——你给出了一切，却不知道从哪里补充自己。</div>
       </div>
 
       <div class="type-card">
@@ -980,7 +1162,7 @@
         <div class="arc-step">
           <div class="arc-module">模块一</div>
           <div class="arc-feel">认同感</div>
-          <div class="arc-sub">原来我的状态有名字</div>
+          <div class="arc-sub">我的状态有名字<br>催眠是什么</div>
         </div>
         <div class="arc-step">
           <div class="arc-module">模块二</div>
@@ -1012,14 +1194,90 @@
           <span>维度一 · 唯一输入</span>
         </div>
         <div class="module-body">
-          基于三种能量的得分组合，呈现用户的<strong>原型类型</strong>（8种之一）。用有温度的语言描述「你是这样一个人」——先命中用户最核心的体验，再描述这种能量组合的力量所在，最后呈现核心张力。
+          模块一承担三层叙事，在用户进入报告的第一时间同时完成三件事：
           <br><br>
-          <strong>写作原则：</strong>先肯定，再呈现张力。不是「你有问题」，是「你是这样一个人，这里是你的力量，这里是你还没打开的门」。
+          <strong>第一层 · 原型类型画像</strong><br>
+          基于三种能量的得分组合，呈现用户的原型类型（8种之一）。用有温度的语言描述「你是这样一个人」——先命中用户最核心的体验，再描述力量所在，最后呈现核心张力。先肯定，再呈现张力，不是「你有问题」，是「这里是你的力量，这里是你还没打开的门」。
+          <br><br>
+          <strong>第二层 · 原型能量是什么</strong><br>
+          一句话建立概念：温柔、勇猛、顽皮是每个人与生俱来的三种原型能量，它们本来是自然流动的。大多数人和它们的关系，都在成长过程中被改写了。
+          <br><br>
+          <strong>第三层 · 催眠和能量的关系（模型图）</strong><br>
+          用可视化模型建立认知：能量为什么会被锁住，锁在哪里，为什么头脑层面的努力触碰不到，催眠如何解锁。催眠在这里第一次出现，不是作为课程推销，而是作为理解自己的框架工具。
         </div>
+        <!-- 催眠模型图 -->
+        <div class="hypno-model">
+          <div class="hypno-model-title">原型能量 · 锁结 · 催眠的关系</div>
+          <div class="hypno-model-subtitle">为什么催眠是解锁原型能量最直接的方法</div>
+
+          <div class="hypno-cols">
+
+            <!-- 左列：原型能量 -->
+            <div class="hypno-col hypno-col-left">
+              <div class="hypno-col-label">原型能量</div>
+              <div class="hypno-col-sub">与生俱来的内在资源</div>
+              <div class="hypno-energies">
+                <div class="hypno-e tender">🌊 温柔</div>
+                <div class="hypno-e fierce">🔥 勇猛</div>
+                <div class="hypno-e playful">✨ 顽皮</div>
+              </div>
+              <div class="hypno-col-note">每个人天生携带<br>三种原型能量</div>
+            </div>
+
+            <!-- 左箭头 -->
+            <div class="hypno-arrow-wrap">
+              <div class="hypno-arrow-label top">被锁住</div>
+              <div class="hypno-arrow">→</div>
+              <div class="hypno-arrow-label bottom">成长创伤<br>原生家庭</div>
+            </div>
+
+            <!-- 中列：锁结状态 -->
+            <div class="hypno-col hypno-col-mid">
+              <div class="hypno-col-label">神经肌肉锁结</div>
+              <div class="hypno-col-sub">CRASH · 能量被困住</div>
+              <div class="hypno-lock-items">
+                <div class="hypno-lock-item">身体紧绷，呼吸压抑</div>
+                <div class="hypno-lock-item">意识固化，模式僵死</div>
+                <div class="hypno-lock-item">越努力，越耗竭</div>
+              </div>
+              <div class="hypno-col-note">头脑的努力<br>触碰不到这里</div>
+              <div class="hypno-methods">
+                <span class="hypno-method-fail">道理 ✗</span>
+                <span class="hypno-method-fail">意志力 ✗</span>
+                <span class="hypno-method-fail">分析 ✗</span>
+              </div>
+            </div>
+
+            <!-- 右箭头 -->
+            <div class="hypno-arrow-wrap">
+              <div class="hypno-arrow-label top">被唤醒</div>
+              <div class="hypno-arrow hypno-arrow-right">→</div>
+              <div class="hypno-arrow-label bottom">直接与<br>身体对话</div>
+            </div>
+
+            <!-- 右列：催眠 -->
+            <div class="hypno-col hypno-col-right">
+              <div class="hypno-col-label">生生不息催眠</div>
+              <div class="hypno-col-sub">COACH · 创造性流动</div>
+              <div class="hypno-hypno-desc">
+                <div class="hypno-hypno-item">✓ 触碰神经系统深层</div>
+                <div class="hypno-hypno-item">✓ 解除身体锁结</div>
+                <div class="hypno-hypno-item">✓ 唤醒被压住的能量</div>
+              </div>
+              <div class="hypno-col-note">不是控制意识<br>而是唤醒创造性潜意识</div>
+            </div>
+
+          </div>
+
+          <div class="hypno-footnote">
+            这份报告用催眠的视角帮你看见自己的能量状态——你在哪里流动，在哪里被卡住，以及如何重新找到出路。
+          </div>
+        </div>
+
         <div class="hook-box">
           <div class="hook-label">认知钩子</div>
-          <div class="hook-text">「这三种能量，是你与生俱来的礼物。但大多数人和它们的关系，都在成长过程中被改写了。」<br>
-          <span style="color:var(--muted); font-size:12px;">→ 用户开始用课程的语言理解自己，在潜意识里记住「原型能量」这个概念</span></div>
+          <div class="hook-text">「这三种能量，是你与生俱来的礼物。但大多数人和它们的关系，在成长过程中被改写了——而这个改写，住在你的身体里，不在你的头脑里。」<br>
+          <span style="color:var(--muted); font-size:12px;">→ 用户第一次看见催眠的真实含义，同时理解为什么这份报告能帮他们看见自己</span></div>
         </div>
       </div>
 
