@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>催眠天赋唤醒测评 · 你的报告</title>
+<style>
+  :root {
+    --bg:      #F4F1EC;
+    --card:    #FFFFFF;
+    --mid:     #EAE6DF;
+    --deep:    #1A1208;
+    --muted:   #5A4A38;
+    --faint:   #9B8B7A;
+    --divider: #D8D0C4;
+    --gold:    #7A4F1E;
+    --gold-lt: #9B6830;
+    --w1:      #7A4F1E;
+    --w2:      #1E5C8B;
+    --w3:      #2E6E2E;
+    --rupture: #8B2E2E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--deep);
+    font-family: 'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif;
+    font-size: 15px;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+  }
+
+  /* COVER */
+  .cover {
+    padding: 56px 40px 48px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .cover-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold-lt);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cover-eyebrow::after {
+    content:'';flex:1;height:1px;background:var(--divider);
+  }
+  .cover-title {
+    font-size: clamp(26px,5vw,40px);
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1.25;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .cover-title span { color: var(--gold); }
+  .cover-sub {
+    font-size: 13px;
+    color: var(--faint);
+    margin-bottom: 32px;
+    letter-spacing: 0.06em;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .cover-meta-item {
+    font-size: 12px;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 44px 40px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .sec-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold-lt);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .sec-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 16px;
+    line-height: 1.35;
+  }
+  p {
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  p:last-child { margin-bottom: 0; }
+  p strong { color: var(--deep); font-weight: 600; }
+
+  /* MODULE 01 GAUGE */
+  .gauge-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 28px 0 0;
+  }
+  .gauge-svg-wrap {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+  }
+  .gauge-svg {
+    width: 180px;
+    height: 180px;
+    transform: rotate(-90deg);
+  }
+  .gauge-track {
+    fill: none;
+    stroke: var(--divider);
+    stroke-width: 11;
+  }
+  .gauge-fill {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 11;
+    stroke-linecap: round;
+    stroke-dasharray: 459;
+    stroke-dashoffset: 459;
+    animation: gaugeIn 1.8s ease-out forwards 0.4s;
+  }
+  /* 65分 → 459*(1-0.65)=160.65 */
+  @keyframes gaugeIn { to { stroke-dashoffset: 161; } }
+  .gauge-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .gauge-num {
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .gauge-denom {
+    font-size: 12px;
+    color: var(--faint);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+  .gauge-zone-label {
+    margin-top: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 3px;
+  }
+  .gauge-desc-box {
+    margin-top: 16px;
+    width: 100%;
+    padding: 18px 20px;
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-top: 3px solid var(--gold);
+  }
+  .gauge-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .gauge-hook {
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: var(--mid);
+    border-left: 3px solid var(--gold-lt);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* MODULE 02 MAP */
+  .map-wrap { margin: 24px 0; }
+  .map-container {
+    border: 1px solid var(--divider);
+    overflow: hidden;
+  }
+  .map-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .map-svg-pane {
+    padding: 20px 16px;
+    background: var(--card);
+    border-right: 1px solid var(--divider);
+  }
+  .map-svg { width: 100%; height: auto; display: block; }
+  .map-legend {
+    padding: 16px 18px;
+    background: var(--card);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0;
+  }
+  .map-leg-row {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .map-leg-row:last-child { border-bottom: none; }
+  .map-leg-world {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .map-leg-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 2px;
+  }
+  .map-leg-status {
+    font-size: 12px;
+  }
+  .map-type-box {
+    background: var(--mid);
+    border-top: 1px solid var(--divider);
+    padding: 20px;
+  }
+  .map-type-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-lt);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .map-type-name {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .map-type-theory {
+    font-size: 12px;
+    color: var(--gold-lt);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+  .map-type-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .map-transition {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(122,79,30,0.05);
+    border-left: 2px solid var(--gold-lt);
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.75;
+  }
+
+  /* MODULE 03 DIMS */
+  .dim-group {
+    margin-top: 20px;
+    border: 1px solid var(--divider);
+    overflow: hidden;
+  }
+  .dim-group + .dim-group { margin-top: 14px; }
+  .dim-group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .dim-group-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dim-group-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .dim-card {
+    padding: 18px 20px;
+    background: var(--card);
+    border-top: 1px solid var(--divider);
+  }
+  .dim-card.blocked { background: rgba(234,230,223,0.6); }
+  .dim-card.rupt { background: rgba(139,46,46,0.03); }
+  .dim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dim-left { display: flex; align-items: center; gap: 10px; }
+  .dim-code { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; }
+  .dim-name { font-size: 14px; font-weight: 700; color: var(--deep); }
+  .dim-right { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+  .dim-bar { width: 60px; height: 4px; background: var(--divider); border-radius: 2px; overflow: hidden; }
+  .dim-bar-fill { height: 100%; border-radius: 2px; }
+  .dim-score { font-size: 20px; font-weight: 800; line-height: 1; }
+  .dim-tag {
+    font-size: 10px; padding: 2px 7px;
+    border-radius: 2px; letter-spacing: 0.06em; font-weight: 700;
+  }
+  .t-open { background: rgba(46,110,46,0.08); color: var(--w3); }
+  .t-mid  { background: rgba(122,79,30,0.08); color: var(--gold-lt); }
+  .t-low  { background: rgba(90,74,56,0.07); color: var(--faint); }
+  .t-rupt { background: rgba(139,46,46,0.08); color: var(--rupture); }
+
+  .dim-def {
+    font-size: 13px;
+    color: var(--faint);
+    background: rgba(234,230,223,0.6);
+    border-left: 2px solid var(--divider);
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    line-height: 1.75;
+  }
+  .dim-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 10px;
+  }
+  .dim-hook {
+    font-size: 12px;
+    color: var(--gold-lt);
+    font-style: italic;
+    padding: 8px 12px;
+    border-left: 2px solid var(--gold-lt);
+    background: rgba(122,79,30,0.03);
+    line-height: 1.7;
+  }
+  .dim-hook.h-low {
+    color: var(--rupture);
+    border-color: var(--rupture);
+    background: rgba(139,46,46,0.03);
+  }
+
+  /* MODULE 04 RUPTURE */
+  .m4-intro {
+    margin: 18px 0;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  /* 模型图：M02 to M04 bridge */
+  .bridge-model {
+    margin: 20px 0;
+    border: 1px solid var(--divider);
+    overflow: hidden;
+  }
+  .bridge-model-label {
+    background: var(--mid);
+    padding: 8px 18px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--faint);
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: 1px solid var(--divider);
+  }
+  .bridge-inner {
+    background: var(--card);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .bridge-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+  }
+  .bridge-cell {
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .bc-w1 { background: rgba(122,79,30,0.06); border-top: 2px solid var(--w1); }
+  .bc-w2 { background: rgba(30,92,139,0.06); border-top: 2px solid var(--w2); }
+  .bc-w3-low { background: rgba(90,74,56,0.05); border-top: 2px dashed var(--faint); }
+  .bc-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .bc-name { font-size: 13px; font-weight: 700; color: var(--deep); margin-bottom: 3px; }
+  .bc-status { font-size: 12px; color: var(--faint); }
+  .bridge-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    gap: 2px;
+    width: 100%;
+  }
+  .bridge-arrow-line {
+    width: 1px; height: 12px;
+    background: rgba(90,74,56,0.25);
+  }
+  .bridge-arrow-text {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--faint);
+    text-transform: uppercase;
+    background: var(--card);
+    padding: 0 10px;
+  }
+  .bridge-triggers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+  }
+  .bridge-trig {
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .bt-ext { background: rgba(122,79,30,0.05); border-top: 2px solid var(--gold-lt); }
+  .bt-int { background: rgba(30,92,139,0.05); border-top: 2px solid var(--w2); }
+  .bt-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .bt-ext .bt-label { color: var(--gold-lt); }
+  .bt-int .bt-label { color: var(--w2); }
+  .bt-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .bridge-crash {
+    width: 100%;
+    background: rgba(139,46,46,0.07);
+    border-top: 2px solid var(--rupture);
+    padding: 14px;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .bc-crash-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--rupture);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .bc-crash-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .bridge-recover {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    margin-top: 2px;
+  }
+  .br-coach {
+    background: rgba(46,110,46,0.06);
+    border-top: 2px solid var(--w3);
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .br-crash {
+    background: rgba(139,46,46,0.05);
+    border-top: 2px solid var(--rupture);
+    padding: 12px 14px;
+    text-align: center;
+    opacity: 0.75;
+  }
+  .br-title { font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+  .br-coach .br-title { color: var(--w3); }
+  .br-crash .br-title { color: var(--rupture); }
+  .br-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* 断流模式 */
+  .mode-intro {
+    margin: 20px 0;
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-left: 4px solid var(--rupture);
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .rupture-card {
+    margin-top: 16px;
+    border: 1px solid rgba(139,46,46,0.2);
+    overflow: hidden;
+  }
+  .rupt-header {
+    background: rgba(139,46,46,0.05);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(139,46,46,0.12);
+  }
+  .rupt-icon { font-size: 20px; color: var(--rupture); opacity: 0.7; }
+  .rupt-title { font-size: 17px; font-weight: 800; color: var(--rupture); }
+  .rupt-sub { font-size: 13px; color: var(--faint); font-style: italic; }
+  .rupt-section {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(139,46,46,0.08);
+    background: var(--card);
+  }
+  .rupt-section:last-child { border-bottom: none; }
+  .rupt-slabel {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--rupture);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 7px;
+    opacity: 0.7;
+  }
+  .rupt-text { font-size: 13px; color: var(--muted); line-height: 1.9; }
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .impact-col {
+    padding: 15px 18px;
+  }
+  .impact-col.pro {
+    background: rgba(46,110,46,0.04);
+    border-top: 2px solid var(--w3);
+    border-right: 1px solid var(--divider);
+  }
+  .impact-col.con {
+    background: rgba(139,46,46,0.04);
+    border-top: 2px solid var(--rupture);
+  }
+  .impact-col-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .pro .impact-col-label { color: var(--w3); }
+  .con .impact-col-label { color: var(--rupture); }
+  .impact-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    align-items: flex-start;
+  }
+  .impact-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .pro .impact-dot { background: var(--w3); }
+  .con .impact-dot { background: var(--rupture); }
+
+  /* MODULE 05 PATH */
+  .path-header {
+    margin: 20px 0 12px;
+    padding: 6px 0;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .path-header-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-lt);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .path-header-zone {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .path-block {
+    border: 1px solid var(--divider);
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .path-block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: var(--mid);
+    border-bottom: 1px solid var(--divider);
+  }
+  .path-step-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .path-step-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--deep);
+    flex: 1;
+  }
+  .path-step-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: rgba(122,79,30,0.1);
+    color: var(--gold-lt);
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    border-radius: 2px;
+  }
+  .path-block-body {
+    padding: 16px 18px;
+    background: var(--card);
+  }
+  .path-block-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 12px;
+  }
+  .path-course-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    background: rgba(122,79,30,0.05);
+    border-left: 3px solid var(--gold);
+    margin-bottom: 8px;
+  }
+  .path-course-row:last-child { margin-bottom: 0; }
+  .pcr-stage {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--gold);
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
+    padding-top: 1px;
+  }
+  .pcr-info { flex: 1; }
+  .pcr-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 3px;
+  }
+  .pcr-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .path-note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--faint);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* EXERCISE */
+  .exercise {
+    margin-top: 20px;
+    padding: 22px;
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-top: 3px solid var(--gold-lt);
+  }
+  .exercise-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--gold-lt);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .exercise-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.95;
+  }
+  .exercise-text em { color: var(--gold); font-style: italic; }
+
+  /* CTA */
+  .cta-section {
+    padding: 48px 40px;
+    text-align: center;
+    background: var(--card);
+    border-top: 1px solid var(--divider);
+  }
+  .cta-pre { font-size: 12px; color: var(--faint); letter-spacing: 0.1em; margin-bottom: 10px; }
+  .cta-title {
+    font-size: 20px; font-weight: 700; color: var(--deep);
+    margin-bottom: 12px; line-height: 1.4;
+  }
+  .cta-desc {
+    font-size: 13px; color: var(--muted);
+    max-width: 400px; margin: 0 auto 24px; line-height: 1.85;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold); color: #fff;
+    padding: 13px 32px; font-size: 14px;
+    font-weight: 700; letter-spacing: 0.08em;
+    border: none; cursor: pointer;
+    text-decoration: none;
+  }
+  .cta-note { margin-top: 12px; font-size: 12px; color: var(--faint); letter-spacing: 0.06em; }
+
+  @media (max-width:600px) {
+    .section, .cover, .cta-section { padding-left: 22px; padding-right: 22px; }
+    .map-top, .bridge-triggers, .impact-grid { grid-template-columns: 1fr; }
+    .map-svg-pane { border-right: none; border-bottom: 1px solid var(--divider); }
+    .impact-col.pro { border-right: none; border-bottom: 1px solid var(--divider); }
+    .bridge-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">催眠天赋唤醒测评 · 个人报告</div>
+  <div class="cover-title">你的<span>催眠天赋</span><br>唤醒报告</div>
+  <div class="cover-sub">基于吉利根生生不息催眠体系 · 三个世界模型</div>
+  <div class="cover-meta">
+    <span class="cover-meta-item">测评日期 · 2025.06</span>
+    <span class="cover-meta-item">天赋类型 · 深井型</span>
+    <span class="cover-meta-item">指数区间 · 天赋流动期</span>
+  </div>
+</div>
+
+<!-- MODULE 01 -->
+<div class="section">
+  <div class="sec-eyebrow">第一部分</div>
+  <div class="sec-title">你的催眠天赋唤醒指数</div>
+
+  <div class="gauge-block">
+    <div class="gauge-svg-wrap">
+      <svg class="gauge-svg" viewBox="0 0 180 180">
+        <circle class="gauge-track" cx="90" cy="90" r="73"/>
+        <circle class="gauge-fill" cx="90" cy="90" r="73"/>
+      </svg>
+      <div class="gauge-center">
+        <div class="gauge-num">65</div>
+        <div class="gauge-denom">/ 100</div>
+      </div>
+    </div>
+    <div class="gauge-zone-label" style="display:none">天赋流动期</div>
+
+    <div class="gauge-desc-box">
+      <div class="gauge-desc">
+        催眠天赋唤醒指数，衡量的不是你学了多少技术，而是你携带的催眠师天赋目前流动了多少。
+        <br><br>
+        综合来看，你的催眠天赋唤醒指数处于流动阶段，这意味着你的催眠天赋已经在流动，但还没有完全打开。
+        <br><br>
+        你大概有过一些这样的时刻：和某个来访者之间，有什么东西悄悄开了，那种感觉不太像普通的谈话，更像是某种深处的连接。但这种状态还不太稳定，有时候能进去，有时候又很难复现。那个连接是真实的——你只是还没有找到随时回到它的路。
+        <br><br>
+        这不是努力程度的问题，也不是你缺少热情。你已经感知到了那个地方的存在，只是有一部分通道，还在等待被系统地唤醒。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 02 -->
+<div class="section">
+  <div class="sec-eyebrow">第二部分</div>
+  <div class="sec-title">你的催眠天赋地图</div>
+
+  <p>吉利根博士用50年的研究告诉我们：真正的深度疗愈，不发生在技术层面，而发生在催眠师自身的三个内在世界同时流动的时候。</p>
+  <p>三个世界，是指催眠师在工作中需要同时激活的三种内在能力：第一个世界，创造性源头，是你"真正在这里"的能力；第二个世界，创造性潜意识，是感应来访者潜意识的能力；第三个世界，意识心智，是带动来访者真实改变的能力。</p>
+  <p>你的测评结果显示，你的三个世界目前是这样的：</p>
+
+  <div class="map-wrap">
+    <div class="map-container">
+      <div class="map-top">
+        <!-- 三角形SVG：两边实线，右边虚线断开 -->
+        <div class="map-svg-pane">
+          <svg viewBox="0 0 280 250" class="map-svg" xmlns="http://www.w3.org/2000/svg">
+            <!-- 左边（临在·高·实线） -->
+            <line x1="140" y1="34" x2="34" y2="212" stroke="#7A4F1E" stroke-width="2" opacity="0.65"/>
+            <!-- 底边（感应·高·实线） -->
+            <line x1="34" y1="212" x2="246" y2="212" stroke="#1E5C8B" stroke-width="2" opacity="0.65"/>
+            <!-- 右边（转化·低·虚线+断点） -->
+            <line x1="246" y1="212" x2="205" y2="128" stroke="#9B8B7A" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.45"/>
+            <line x1="140" y1="34" x2="178" y2="118" stroke="#9B8B7A" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.45"/>
+            <text x="200" y="145" text-anchor="middle" font-size="13" fill="#8B2E2E" opacity="0.65">╳</text>
+
+            <!-- 中心文字 -->
+            <text x="140" y="147" text-anchor="middle" font-size="9" fill="#5A4A38" opacity="0.35" letter-spacing="2" font-family="PingFang SC,Microsoft YaHei,sans-serif">创造性流动</text>
+
+            <!-- 顶点：临在 高 -->
+            <circle cx="140" cy="34" r="28" fill="#F4F1EC" stroke="#7A4F1E" stroke-width="2"/>
+            <text x="140" y="27" text-anchor="middle" font-size="14" fill="#7A4F1E">☯</text>
+            <text x="140" y="44" text-anchor="middle" font-size="8" fill="#7A4F1E" font-family="PingFang SC,Microsoft YaHei,sans-serif">临在·较高</text>
+
+            <!-- 左下：感应 高 -->
+            <circle cx="34" cy="212" r="28" fill="#F4F1EC" stroke="#1E5C8B" stroke-width="2"/>
+            <text x="34" y="205" text-anchor="middle" font-size="14" fill="#1E5C8B">✦</text>
+            <text x="34" y="222" text-anchor="middle" font-size="8" fill="#1E5C8B" font-family="PingFang SC,Microsoft YaHei,sans-serif">感应·较高</text>
+
+            <!-- 右下：转化 低 -->
+            <circle cx="246" cy="212" r="28" fill="rgba(234,230,223,0.9)" stroke="#9B8B7A" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="246" y="205" text-anchor="middle" font-size="14" fill="#9B8B7A">◎</text>
+            <text x="246" y="222" text-anchor="middle" font-size="8" fill="#9B8B7A" font-family="PingFang SC,Microsoft YaHei,sans-serif">转化·较低</text>
+
+            <!-- 边标签 -->
+            <text x="76" y="116" text-anchor="middle" font-size="8" fill="#7A4F1E" opacity="0.6" transform="rotate(-60,76,116)" font-family="PingFang SC,Microsoft YaHei,sans-serif">场域感知·醒觉力</text>
+            <text x="140" y="230" text-anchor="middle" font-size="8" fill="#1E5C8B" opacity="0.6" font-family="PingFang SC,Microsoft YaHei,sans-serif">潜意识感应·涵容力</text>
+          </svg>
+        </div>
+
+        <!-- 图例 -->
+        <div class="map-legend">
+          <div class="map-leg-row">
+            <div class="map-leg-world" style="color:var(--w1)">第一个世界 · 临在</div>
+            <div class="map-leg-name">创造性源头</div>
+            <div class="map-leg-status" style="color:var(--w3)">✦ 顺畅流动 · 较高</div>
+          </div>
+          <div class="map-leg-row">
+            <div class="map-leg-world" style="color:var(--w2)">第二个世界 · 感应</div>
+            <div class="map-leg-name">创造性潜意识</div>
+            <div class="map-leg-status" style="color:var(--w3)">✦ 顺畅流动 · 较高</div>
+          </div>
+          <div class="map-leg-row">
+            <div class="map-leg-world" style="color:var(--faint)">第三个世界 · 转化</div>
+            <div class="map-leg-name">意识心智</div>
+            <div class="map-leg-status" style="color:var(--faint)">◌ 等待激活 · 较低</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 类型描述：无标题，融入正文 -->
+      <div class="map-type-box">
+        <div class="map-type-desc">
+          你在临在和感应两层都相对畅通。你能进去，而且你知道怎么待在那里。<br><br>
+          来访者在你这里往往会有一种特别的感受：他们愿意说出那些从没对别人说过的事，因为你很少让他们觉得"说了也没用"或"说了会被评判"。这不是技巧，是你临在和感应的通道打开之后，自然散发出来的东西。<br><br>
+          但第三个世界的通道，转化层，还没有充分激活。这让你像一口<strong>深井</strong>：有深度，有容量，来访者愿意把"深重"的东西放进来。<br><br>
+          但深井尚未学会自己涌出泉水。水在那里，却没有一个从深处向上涌出的机制。你能陪来访者走到很深的地方，但在那里，你们常常会停下来，带着那个重量，不太确定接下来该怎么走。<br><br>
+          那个把深度转化为改变的能力，一直在你里面，还在等待被唤醒。<br><br>
+          你不只是在咨询室里这样。<br><br>
+          你在这个世界里的存在方式，本来就是朝向内在的。当别人关注外在发生了什么，你感兴趣的往往是内在正在发生什么——那个藏在语言背后的感受，那个还没有被说出口的真实。这不是你学来的，这是你本来的样子。<br><br>
+          因为这个，你和别人之间的关系有一种特定的质地。人们在你这里，会不自觉地走进更深的地方——不是因为你做了什么，而是因为你的临在本身就在邀请那个深度发生。<br><br>
+          这份能量，是容纳的，是接收的。它像土壤一样工作——不显眼，不推动，但它在那里，生命就有地方落根。
+        </div>
+      </div>
+    </div>
+
+    <div class="map-transition">
+      接下来的报告，会把这份天赋地图落到每一个具体维度，帮你看见：在唤醒催眠天赋的路上，你的每个能力目前具体在哪里，顺畅的在哪里，还在等待被唤醒的又在哪里。
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 03 -->
+<div class="section">
+  <div class="sec-eyebrow">第三部分</div>
+  <div class="sec-title">你的七维度天赋剖面</div>
+
+  <!-- 第一个世界 -->
+  <div class="dim-group">
+    <div class="dim-group-header" style="background:rgba(122,79,30,0.05);">
+      <div class="dim-group-dot" style="background:var(--w1)"></div>
+      <div class="dim-group-label" style="color:var(--w1)">第一个世界 · 临在天赋 · 顺畅流动</div>
+    </div>
+
+    <div class="dim-card">
+      <div class="dim-header">
+        <div class="dim-left">
+          <span class="dim-code" style="color:var(--w1)">A-01</span>
+          <span class="dim-name">场域感知</span>
+        </div>
+        <div class="dim-right">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width:86%;background:var(--w1)"></div></div>
+          <span class="dim-score" style="color:var(--w1)">86</span>
+          <span class="dim-tag t-open">顺畅</span>
+        </div>
+      </div>
+      <div class="dim-def">场域感知指的是：还没有开始正式工作，你能在多大程度上感知到对方带来的状态——那些没有被说出口的部分。<br><br>低分者，通常需要对方明确说出来才能感知到；<br>高分者，往往在对方还没开口时，身体里就已经有了某种感受。</div>
+      <div class="dim-body"><strong>你的场域感知处于较高水平。</strong><br><br>进入咨询场域，可能还没等对方开口，某种感受就已经在你身体里发生了，你感受到一种情绪的涌动，或者某个隐隐的信号。<br><br>当来访者说"我最近还好"，你身体里有一个声音悄悄地知道，也许不完全是这样。这不是靠推理得出来的，而是一种更直接的感知，它不经过分析，直接到达。</div>
+      <div class="dim-body">你在场域感知的通道已经相对畅通。它让你建立信任关系的速度比其他人更快，因为来访者在你这里感到的不只是"被倾听"，更像是"被接收到"，这两种感受带来的安全感是不同的。</div>
+    </div>
+
+    <div class="dim-card">
+      <div class="dim-header">
+        <div class="dim-left">
+          <span class="dim-code" style="color:var(--w1)">A-02</span>
+          <span class="dim-name">醒觉力</span>
+        </div>
+        <div class="dim-right">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width:79%;background:var(--w1)"></div></div>
+          <span class="dim-score" style="color:var(--w1)">79</span>
+          <span class="dim-tag t-open">顺畅</span>
+        </div>
+      </div>
+      <div class="dim-def">醒觉力指的是：在深度陪伴来访者的同时，你能在多大程度上保持对"自己正在哪里"的觉察。<br><br>低分者，容易在高强度工作中失去自我边界；<br>高分者，能在进入对方世界的同时，始终有一部分知道自己是谁。</div>
+      <div class="dim-body"><strong>你的醒觉力处于较高水平。</strong><br><br>在多数个案里，你大致能感受到自己"在那里"——陪着来访者，同时有一部分清醒地知道自己是谁。<br><br>当然，不是每次都做到这一点，在来访者的情绪特别强烈，或者他的议题触碰到你自己某些部分的时候，你可能也会有一种"飘了一下"的感觉。</div>
+      <div class="dim-body">这个能力让你的临在有一定的地基。它和场域感知放在一起，构成了你进入深度工作比较自然的通道，你能进去，多数时候也能在里面保持基本稳定。</div>
+    </div>
+  </div>
+
+  <!-- 第二个世界 -->
+  <div class="dim-group">
+    <div class="dim-group-header" style="background:rgba(30,92,139,0.05);">
+      <div class="dim-group-dot" style="background:var(--w2)"></div>
+      <div class="dim-group-label" style="color:var(--w2)">第二个世界 · 感应天赋 · 顺畅流动</div>
+    </div>
+
+    <div class="dim-card">
+      <div class="dim-header">
+        <div class="dim-left">
+          <span class="dim-code" style="color:var(--w2)">B-01</span>
+          <span class="dim-name">潜意识感应</span>
+        </div>
+        <div class="dim-right">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width:81%;background:var(--w2)"></div></div>
+          <span class="dim-score" style="color:var(--w2)">81</span>
+          <span class="dim-tag t-open">顺畅</span>
+        </div>
+      </div>
+      <div class="dim-def">潜意识感应指的是：你能在多大程度上感应到来访者没有说出口的那部分，那个住在他潜意识里、甚至连他自己都不完全清楚的真实状态。<br><br>低分者，主要依靠对方说出来的内容工作；<br>高分者，能在对话的空隙里接收到更深层的信号。</div>
+      <div class="dim-body"><strong>你的潜意识感应处于较高水平。</strong><br><br>你大概有过这样的时刻：来访者在讲一件事，而你的注意力莫名地落到了一个他没有主动提到的方向，你说出来，来访者愣了一下："你怎么知道？"<br><br>这类时刻在你的工作中出现的频率大概不低。你不一定每次都能说清楚自己是怎么知道的，但那个感应是真实的，它一直在那里工作，即使你没有刻意去用它。</div>
+      <div class="dim-body">潜意识感应是深度催眠工作最核心的能力之一。不是因为你说了什么对的话，而是因为你触碰到了他真正在的地方。来访者在你这里感到的"被看见"，往往来源于此。</div>
+    </div>
+
+    <div class="dim-card">
+      <div class="dim-header">
+        <div class="dim-left">
+          <span class="dim-code" style="color:var(--w2)">B-02</span>
+          <span class="dim-name">涵容力</span>
+        </div>
+        <div class="dim-right">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width:73%;background:var(--w2)"></div></div>
+          <span class="dim-score" style="color:var(--w2)">73</span>
+          <span class="dim-tag t-open">顺畅</span>
+        </div>
+      </div>
+      <div class="dim-def">涵容力指的是：当来访者带来沉重、混乱或者黑暗的内容时，你能在多大程度上"接住"它，而不是退缩、评判，或者试图快速把它化解掉。<br><br>低分者，在高强度情绪面前容易产生回避；<br>高分者，能留一个空间安放沉重、混乱的内容。</div>
+      <div class="dim-body"><strong>你的涵容力处于较高水平。</strong><br><br>在来访者讲到深沉或者痛苦的内容时，你能留在那里，不急着给出建议或把话题转轻。相反，你能在那个"重量"里待一会儿，给这些"重量"一个容身之处。<br><br>来访者某种程度上感受得到这一点，所以他们倾向于在你这里说出那些更深的、更难开口的事情。<br><br>如果用一个物品来形容，涵容力就像是容器。你的容器较大，来访者带来的沉重、混乱、黑暗，在你这里都有地方放。涵容力和潜意识感应放在一起，是你最核心的天赋来源——你既能感应到深处有什么，也有空间让它待在那里。</div>
+    </div>
+  </div>
+
+  <!-- 第三个世界 -->
+  <div class="dim-group">
+    <div class="dim-group-header" style="background:rgba(90,74,56,0.04);">
+      <div class="dim-group-dot" style="background:var(--faint)"></div>
+      <div class="dim-group-label" style="color:var(--faint)">第三个世界 · 转化天赋 · 等待激活</div>
+    </div>
+
+    <div class="dim-card">
+      <div class="dim-header">
+        <div class="dim-left">
+          <span class="dim-code" style="color:var(--faint)">C-01</span>
+          <span class="dim-name">创造性引导</span>
+        </div>
+        <div class="dim-right">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width:44%;background:var(--divider)"></div></div>
+          <span class="dim-score" style="color:var(--faint)">44</span>
+          <span class="dim-tag t-low">等待激活</span>
+        </div>
+      </div>
+      <div class="dim-def">创造性引导指的是：你能在多大程度上用意象、隐喻、身体语言等非语言方式，引导来访者进入一个不同的内在空间，打开创造性潜意识的通道。<br><br>低分者，在需要引导的时刻，不确定用什么方式打开那扇门；<br>高分者，能自然地用意象、隐喻或身体语言打开来访者的内在空间，引导自然发生。</div>
+      <div class="dim-body"><strong>你在创造性引导上目前还有较大的激活空间。</strong><br><br>你可能有过这样的感觉：来访者需要进入一个更深的地方，你也能感知到入口在哪里，但下一步用什么方式打开它，你不太确定。或者你用了一个方法，来访者理解了，但那种更深的松动没有发生，不是他不愿意，是那个通道还没打开。</div>
+      <div class="dim-body">当你能更自然地使用创造性语言工作时，你们之间发生的改变会从"理解了一些事"变成"某个东西真的松动了"。这是第三个世界里最需要在实践中被培养的能力。</div>
+    </div>
+
+    <div class="dim-card">
+      <div class="dim-header">
+        <div class="dim-left">
+          <span class="dim-code" style="color:var(--faint)">C-02</span>
+          <span class="dim-name">影响力</span>
+        </div>
+        <div class="dim-right">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width:38%;background:var(--divider)"></div></div>
+          <span class="dim-score" style="color:var(--faint)">38</span>
+          <span class="dim-tag t-low">等待激活</span>
+        </div>
+      </div>
+      <div class="dim-def">影响力在这里指的不是个人魅力或者说话有力量，而是：你自己处于流动状态时，这个状态能在多大程度上传递给来访者，带动他的神经系统发生真实的改变。<br><br>低分者，和来访者之间的改变更多依赖技术和语言；<br>高分者，"在场"本身就会带动对方的系统产生变化。</div>
+      <div class="dim-body"><strong>你在影响力上目前还有较大的发展空间。</strong><br><br>你可能会发现：你说了正确的话，用了正确的技术，来访者也在认真听，但那种深层的改变没有发生。不是他不投入，也不是你的技术不对，是你处于创造性流动的状态，还没有稳定到能作为信号传递给他的程度。</div>
+      <div class="dim-body">这个能力激活之后，你的工作体验会发生一个明显的变化：从"我在努力帮他"变成"我们之间有什么东西在一起发生"。这是催眠工作最核心的礼物——不是你做了什么，而是你成为了什么。</div>
+    </div>
+  </div>
+
+  <!-- 转境 -->
+  <div class="dim-group">
+    <div class="dim-group-header" style="background:rgba(90,74,56,0.04);">
+      <div class="dim-group-dot" style="background:var(--rupture)"></div>
+      <div class="dim-group-label" style="color:var(--faint)">独立维度 · 转境 · 卓越催眠师的分水岭</div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-header">
+        <div class="dim-left">
+          <span class="dim-code" style="color:var(--rupture)">D</span>
+          <span class="dim-name">转境</span>
+        </div>
+        <div class="dim-right">
+          <div class="dim-bar"><div class="dim-bar-fill" style="width:52%;background:var(--rupture);opacity:0.6"></div></div>
+          <span class="dim-score" style="color:var(--rupture)">52</span>
+          <span class="dim-tag t-rupt">成长中</span>
+        </div>
+      </div>
+      <div class="dim-def">转境指的是：当阻抗出现，当个案卡住，当来访者的议题触碰到你自己还没有整合的部分，你能不能不被带走——甚至把那个时刻，变成疗愈走得最深的入口。<br><br>低分者，在压力出现时容易被带走或悄悄退出，需要较长时间恢复；<br>高分者，能在断流的时刻重新找到支点，甚至把困境变成疗愈最深的入口。</div>
+      <div class="dim-body"><strong>你的转境处于发展中的水平，处于中间区间。</strong><br><br>顺利的个案你能比较稳定地跟住，但当真正的阻抗出现，或者高强度个案连续积累之后，你可能会感到一种比较深的消耗。<br><br>你撑得过去，但需要花不少代价。那个"把困境变成入口"的动作，你有时候能做到，但还不够稳定。</div>
+      <div class="dim-body">转境，是催眠工作里最难被看见、也最难被培养的能力。它不体现在顺利的个案里，而是在那些最艰难的时刻，当来访者阻抗、当个案卡住、当你自己的某个部分被触碰到，你是否还能在那里，而不是被带走，或者悄悄退出。</div><div class="dim-body">转境能力的状态，往往决定了一个催眠师能走多深、能走多久。真正的深度工作，从来不发生在顺畅的时候。当压力出现，它的作用会真正显现。</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 04 -->
+<div class="section">
+  <div class="sec-eyebrow">第四部分</div>
+  <div class="sec-title">流动与断流</div>
+
+  <div class="m4-intro">
+    前面的七个维度，描述的是你在相对平稳状态下的天赋分布。但当压力真正来临，这张地图可能会在一个特定的地方发生形变。
+  </div>
+
+  <!-- 模型图 -->
+  <div class="bridge-model">
+    <div class="bridge-model-label">你的天赋地图在压力下的变化</div>
+    <div class="bridge-inner">
+
+      <!-- 三角形：三个世界状态 -->
+      <div style="width:100%;background:var(--card);padding:16px 20px;">
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+          <!-- 左边：临在高·实线 -->
+          <line x1="160" y1="24" x2="28" y2="176" stroke="#7A4F1E" stroke-width="2" opacity="0.6"/>
+          <!-- 底边：感应高·实线 -->
+          <line x1="28" y1="176" x2="292" y2="176" stroke="#1E5C8B" stroke-width="2" opacity="0.6"/>
+          <!-- 右边：转化低·虚线 -->
+          <line x1="292" y1="176" x2="160" y2="24" stroke="#9B8B7A" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.45"/>
+          <!-- 断点 -->
+          <text x="243" y="108" text-anchor="middle" font-size="12" fill="#8B2E2E" opacity="0.6">╳</text>
+          <!-- 中心 -->
+          <text x="160" y="120" text-anchor="middle" font-size="9" fill="#5A4A38" opacity="0.35" letter-spacing="1.5" font-family="PingFang SC,Microsoft YaHei,sans-serif">创造性流动</text>
+          <!-- 顶点：临在 -->
+          <circle cx="160" cy="24" r="22" fill="#F4F1EC" stroke="#7A4F1E" stroke-width="1.5"/>
+          <text x="160" y="19" text-anchor="middle" font-size="12" fill="#7A4F1E">☯</text>
+          <text x="160" y="33" text-anchor="middle" font-size="8" fill="#7A4F1E" font-family="PingFang SC,Microsoft YaHei,sans-serif">临在·较高</text>
+          <!-- 左下：感应 -->
+          <circle cx="28" cy="176" r="22" fill="#F4F1EC" stroke="#1E5C8B" stroke-width="1.5"/>
+          <text x="28" y="171" text-anchor="middle" font-size="12" fill="#1E5C8B">✦</text>
+          <text x="28" y="185" text-anchor="middle" font-size="8" fill="#1E5C8B" font-family="PingFang SC,Microsoft YaHei,sans-serif">感应·较高</text>
+          <!-- 右下：转化 -->
+          <circle cx="292" cy="176" r="22" fill="rgba(234,230,223,0.9)" stroke="#9B8B7A" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="292" y="171" text-anchor="middle" font-size="12" fill="#9B8B7A">◎</text>
+          <text x="292" y="185" text-anchor="middle" font-size="8" fill="#9B8B7A" font-family="PingFang SC,Microsoft YaHei,sans-serif">转化·较低</text>
+        </svg>
+      </div>
+
+      <!-- 向下箭头 -->
+      <div class="bridge-arrow">
+        <div class="bridge-arrow-line"></div>
+        <div class="bridge-arrow-text">压力出现</div>
+        <div class="bridge-arrow-line"></div>
+      </div>
+
+      <!-- 断流 -->
+      <div class="bridge-crash">
+        <div class="bc-crash-title">三个世界流动断掉</div>
+        <div class="bc-crash-desc">神经系统进入锁结状态</div>
+      </div>
+
+      <!-- 转境介入 -->
+      <div class="bridge-arrow">
+        <div class="bridge-arrow-line"></div>
+        <div class="bridge-arrow-text">转境介入</div>
+        <div class="bridge-arrow-line"></div>
+      </div>
+
+      <!-- 两格结果 -->
+      <div class="bridge-recover">
+        <div class="br-coach">
+          <div class="br-title">重新流动</div>
+          <div class="br-desc">断流成为疗愈入口</div>
+        </div>
+        <div class="br-crash">
+          <div class="br-title">持续锁结</div>
+          <div class="br-desc">天花板在这里加厚</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="m4-intro" style="margin-top:16px;">
+    上图展示的，正是这个过程：你的三个世界在顺畅状态下是流动的，但当外部触发（比如困难个案、来访者阻抗）或内部触发（来访者的议题触碰到你自己还没有整合的部分）出现时，三个世界的流动会断掉，神经系统进入锁结状态。    <br><br>
+    在生生不息催眠的理论里，这个流动断掉的现象有一个名字：断流。它指的是当压力出现，神经系统会自动启动一种保护模式，把你从流动状态切换出去。这不是你的选择，是你的神经系统在用它学会的最古老的方式保护你。每个人的断流方式不同，取决于你的神经系统在过去学会了什么。
+    <br><br>
+    对你来说，有一种特定的断流模式，在压力出现的时候会比较容易被触发。
+  </div>
+
+  <div class="rupture-card">
+    <div class="rupt-header">
+      <div class="rupt-icon">◈</div>
+      <div>
+        <div class="rupt-title">沉入模式</div>
+        <div class="rupt-sub">你进去了，但找不到支点出来</div>
+      </div>
+    </div>
+
+    <div class="rupt-section">
+      <div class="rupt-text">
+        如前所说，你第三个世界的通道还没有充分激活。你能进入来访者的内在深处，但那里还没有一条从深处向上涌出的路。于是当压力出现时，你的神经系统会做它最熟悉的事：继续进去，继续陪着，继续待着。沉得越来越深，直到某个时刻感到一种说不清楚的疲惫。
+      </div>
+    </div>
+
+    <div class="rupt-section">
+      <div class="rupt-text">
+        这种模式的形成，往往比你以为的更早。<br><br>
+        你的原生家庭中，有情绪不稳定的人吗？<br>
+        你从小到大，家里人是怎么处理困境的？<br>
+        当你陷入低落或痛苦，父母是怎么做的？<br><br>
+        在过去的成长经历中，你可能学会了感知周围人的情绪状态。这是真实的天赋，也是你付出很多才换来的能力。<br><br>
+        这些都会在你的神经系统当中建立一个关系模板：感知周围人的情绪，然后接住，陪着，待着，但不知道怎么转化。这套程序就这样留在了神经系统里，悄悄地运行着——不是因为它是错的，而是因为那时候的你，只学会了这一种方式。<br><br>
+        认识它，是和它建立新关系的第一步。<br><br>
+        当断流发生，你可能会注意到一些身体层面的信号：呼吸变浅了，或者有一种说不清楚的沉，或者你发现自己开始用思考代替感受，开始在头脑里搜索"我应该说什么"。这些都是神经系统进入保护模式的信号。
+      </div>
+    </div>
+
+    <div class="rupt-section" style="padding:0;">
+      <div class="impact-grid">
+        <div class="impact-col pro">
+          <div class="impact-col-label">这个模式带给你的</div>
+          <div class="impact-item"><div class="impact-dot"></div><span>你能建立很多人建立不了的深度关系。来访者在你这里感受到一种真实的接纳，那些沉重的、黑暗的、从没对任何人说过的东西，在你这里有容身之处</span></div>
+          <div class="impact-item"><div class="impact-dot"></div><span>你的陪伴本身就有疗愈的力量。很多来访者在你这里的改变，不是因为你说了什么对的话，而是因为他们第一次感受到，有人真的在那里接住了他们</span></div>
+          <div class="impact-item"><div class="impact-dot"></div><span>这种能力不只在咨询里发生。你身边的人大概也有这样的感受：和你在一起，说话不需要太小心，有些东西可以直接说出来。这是你这个人本身散发出来的东西，不是角色，不是职业，是你</span></div>
+        </div>
+        <div class="impact-col con">
+          <div class="impact-col-label">这个模式限制了你的</div>
+          <div class="impact-item"><div class="impact-dot"></div><span>你能陪他们走进最深的地方，但在那里，还没有找到一个稳定的方式带他们走出来。这个限制不只出现在工作里，在生活中，当身边的人陷入困境，你可能也有同样的感受：你在那里，你接住了，但接下来该怎么办，你不太确定</span></div>
+          <div class="impact-item"><div class="impact-dot"></div><span>高强度陪伴之后，你可能需要比别人更长的时间恢复。那种疲惫不是身体上的，而是某个更深的地方被用掉了。在生活中也是如此，陪伴了一个经历困境的朋友或家人之后，你可能需要独处一段时间，才能把自己找回来</span></div>
+          <div class="impact-item"><div class="impact-dot"></div><span>还有一个更隐秘的影响：你开始怀疑自己。个案结束，来访者说"好多了"，但你心里有一种说不清楚的不确定。你付出了很多，但不知道那些付出有没有真正帮到对方，还是只是让他们暂时感觉好了一些。久了，这会悄悄地侵蚀你对自己的信心</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rupt-section">
+      <div class="rupt-slabel" style="color:var(--rupture);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;margin-bottom:10px;opacity:0.7;">当断流发生，你能重新流动吗？</div>
+      <div class="rupt-text">
+        断流本身不是问题，每个催眠师都会遇到。这个时候，转境的能力决定你能不能重新流动，还是停留在锁结里。<br><br>
+        你现在的转境能力，能够让你在顺利的个案里保持流动。但深井型的断流比其他类型更隐性——它不是明显的"逃跑"或"用力推"，而是继续沉，继续陪，继续待。这种断流很难被自己觉察，因为它看起来和"深度陪伴"太像了。正因为如此，在那些最难的时刻，当沉入模式被触发，重新找到支点是更大的挑战。<br><br>
+        吉利根有一个核心信念：障碍本身就是资源。断流发生的那个时刻，不是需要被克服的问题，而是疗愈可以走得最深的入口——因为那个时刻，你和来访者都在最真实的地方。但要把断流变成入口，需要你的神经系统先学会在那里站稳，而不是沉进去。<br><br>
+        这个能力不是靠经验积累出来的。沉入模式在神经系统里运行得越久，它就越像是"你本来就是这样的人"。解除它，需要直接在神经系统层面工作，让你的系统学会一件新的事：感知到了，接住了，然后从那里出来，带着来访者一起出来。<br><br>
+        当这一步真正发展出来，那个一直让你感到疲惫的时刻，会变成你工作里最有力量的时刻。
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODULE 05 -->
+<div class="section">
+  <div class="sec-eyebrow">第五部分</div>
+  <div class="sec-title">你的催眠天赋激活路径</div>
+
+  <p>你已经在这条路上了。你的感应力、你的涵容力、你能进入别人内在世界的能力——这些不是偶然的，是你付出了很多才发展出来的真实天赋。它们不会消失。下一步，是让它们有一个出口。</p>
+
+  <p>临在和感应已经是你的地基，第三个世界的通道是你现在最近的门。以下三步，是为你量身给出的路径。</p>
+
+  <div class="path-header">
+    <div class="path-header-label">你的成长路径</div>
+    <div class="path-header-zone">深井型 · 临在较高 · 感应较高 · 转化较低</div>
+  </div>
+
+  <!-- 第一步 -->
+  <div class="path-block">
+    <div class="path-block-header">
+      <div class="path-step-num">1</div>
+      <div class="path-step-title">让临在和感应在压力下也能稳住</div>
+      <div class="path-step-tag">当前基础</div>
+    </div>
+    <div class="path-block-body">
+      <div class="path-block-desc">
+        你的临在和感应在顺畅状态下是流动的。但深井型最容易发生的事，是当压力出现，沉入模式悄悄启动，这两层的稳定性就开始动摇——你进去了，但找不到支点出来。
+        <br><br>
+        所以第一步的重点，不是让临在和感应变得"更好"，而是让它们在压力下也能站稳。当你的神经系统有一个稳定的锚点，沉入模式就少了一个触发的条件。
+        <br><br>
+        一个具体的练习方向是回归中心：在每次进入咨询之前，用身体动作、呼吸或意象，帮助神经系统真正找到它的锚点。不是让自己平静，而是让自己真正落地。当这个根基稳了，高强度工作后恢复更快，沉入的东西能更自然地放下来。你会重新感受到，流动是你本来的状态。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二步 -->
+  <div class="path-block">
+    <div class="path-block-header">
+      <div class="path-step-num">2</div>
+      <div class="path-step-title">打开第三个世界，建立从深处涌出的通道</div>
+      <div class="path-step-tag">核心突破</div>
+    </div>
+    <div class="path-block-body">
+      <div class="path-block-desc">
+        这是你整个天赋组合里最值得优先投入的地方。你已经能进去，能接住——现在需要的，是找到一个从深处向上涌出的通道，让你在那个深处不只是陪着，而是能带着来访者走向改变。
+        <br><br>
+        <strong>用意象工作。</strong>当来访者停在一个沉重的地方，不急着分析，试着问他：如果这个感受有一个形状、一种颜色，或者一个画面，会是什么？意象能绕过意识层面的防御，直接打开创造性潜意识的通道，这正是第三个世界被激活的方式之一。然后就待在那里，看看什么开始移动。
+        <br><br>
+        <strong>用身体工作。</strong>改变首先发生在身体里，不只在头脑里。注意来访者的呼吸、姿势、细微的肌肉变化，这些是潜意识正在发生什么的信号。当你开始用身体语言引导，而不只是用语言分析，转化的通道会慢慢打开。
+        <br><br>
+        <strong>用三种原型能量工作。</strong>温柔、勇猛、顽皮——这三种能量是催眠工作里带动改变的核心资源。你已经有温柔，这是你深度陪伴的来源。现在需要发展的是勇猛，那个能在深度陪伴之后，带着来访者往前走的力量。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三步 -->
+  <div class="path-block">
+    <div class="path-block-header">
+      <div class="path-step-num">3</div>
+      <div class="path-step-title">让转境从偶尔做到，变成稳定做到</div>
+      <div class="path-step-tag">长期发展</div>
+    </div>
+    <div class="path-block-body">
+      <div class="path-block-desc">
+        你已经有一定的转境基础——顺利的个案里，你能跟住。这一步不是从零开始，而是让它从"有时候能做到"变成"在最难的时刻也能稳定做到"。
+        <br><br>
+        深井型的转境挑战有它的特殊性：沉入模式看起来和深度陪伴太像，断流发生的时候你不一定能第一时间觉察到。所以这一步首先要练的，是觉察：当你感到那种说不清楚的沉，当呼吸变浅了，当你发现自己开始在头脑里搜索"我应该说什么"——认出这个信号，就是重新流动的起点。
+        <br><br>
+        认出之后，不要去解决问题，先回到身体，回到中心，让自己重新落地。感受脚踩在地上的重量，等你感觉自己回来了，再重新进入那个空间。这个动作重复够多次，神经系统就会学会一件新的事：断流不是终点，它是一个入口。
+      </div>
+    </div>
+  </div>
+
+  <!-- 练习 -->
+  <div class="exercise">
+    <div class="exercise-label">在结束这份报告之前，做一件事</div>
+    <div class="exercise-text">
+      把手放在胸口，深吸一口气，慢慢呼出来。感受脚踩在地上的重量。<br><br>
+      现在，想起一个最近的来访者。不要分析他说了什么，只是感受：<em>他带来了什么？</em><br><br>
+      在这个感受里停留30秒，不要做任何事，只是感受。<br><br>
+      你的潜意识感应天赋一直在那里工作。下一步，是找到让它从感知走向改变的通道。
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-pre">结语</div>
+  <div class="cta-desc">你已经知道自己在哪里，知道卡在哪里，也知道下一步往哪里走。剩下的，是找到一套能在神经系统层面直接帮你打开那扇门的体系。</div>
+  <a class="cta-btn" href="#">添加专属顾问微信</a>
+  <div class="cta-note">生生不息催眠体系 · 吉利根博士亲授 · 五阶系统训练</div>
+</div>
+
+</body>
+</html>
