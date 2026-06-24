@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>成事基因测评报告 · 内核已成型</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system，"PingFang SC"，"Microsoft YaHei"，sans-serif;
+    background: #0a0e27;
+    color: #e8e8f0;
+    line-height: 1.85;
+  }
+  .container { max-width: 720px; margin: 0 auto; }
+  .module {
+    padding: 60px 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .module-tag {
+    display: inline-block;
+    font-size: 13px;
+    color: #d4a574;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    line-height: 1.4;
+    background: linear-gradient(135deg, #fff 0%, #d4a574 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  h2 { font-size: 22px; font-weight: 500; margin: 32px 0 16px; color: #f0e0c0; }
+  h3 { font-size: 17px; font-weight: 500; margin: 24px 0 12px; color: #d4a574; }
+  p { font-size: 15px; margin-bottom: 16px; color: #d8d8e0; }
+  .hero {
+    background: radial-gradient(ellipse at top, #1a2050 0%, #0a0e27 70%);
+    padding: 70px 40px 50px;
+    text-align: center;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+    color: #a0a0b8;
+    margin-bottom: 16px;
+    letter-spacing: 6px;
+  }
+  .hero-title {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #d4a574 0%, #f5e0b8 50%, #d4a574 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+  .hero-tagline {
+    color: #c0c0d0;
+    font-size: 15px;
+    max-width: 480px;
+    margin: 0 auto 30px;
+    line-height: 1.9;
+  }
+  /* 报告开场白 */
+  .opening-statement {
+    background: linear-gradient(180deg, #0a0e27 0%, #0d1230 100%);
+    padding: 50px 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .opening-statement .label {
+    font-size: 12px;
+    color: #d4a574;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .opening-statement .text {
+    font-size: 16px;
+    color: #f0e0c0;
+    line-height: 2;
+    max-width: 580px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+  /* 三段式分隔 */
+  .stage-divider {
+    padding: 40px 40px 20px;
+    border-left: 3px solid #d4a574;
+    margin: 0 40px;
+    background: linear-gradient(90deg, rgba(212,165,116,0.06) 0%, transparent 100%);
+  }
+  .stage-divider .stage-name {
+    font-size: 13px;
+    color: #d4a574;
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+  }
+  .stage-divider .stage-text {
+    font-size: 18px;
+    color: #f0e0c0;
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .anchor-quote {
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.08), rgba(74, 144, 226, 0.05));
+    border-left: 3px solid #d4a574;
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .anchor-quote .lead {
+    font-size: 13px;
+    color: #d4a574;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .anchor-quote .content {
+    font-size: 15px;
+    color: #f0e0c0;
+    line-height: 1.85;
+    margin: 0;
+  }
+  .hook {
+    margin-top: 32px;
+    padding: 18px 22px 18px 50px;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.12), rgba(212, 165, 116, 0.04));
+    border-radius: 8px;
+    border: 1px solid rgba(212, 165, 116, 0.25);
+    position: relative;
+  }
+  .hook::before {
+    content："✦"；
+    position: absolute;
+    top: 18px;
+    left: 22px;
+    color: #d4a574;
+    font-size: 16px;
+  }
+  .hook p {
+    margin: 0;
+    font-size: 14px;
+    color: #f0d8a8;
+    font-style: italic;
+    line-height: 1.75;
+  }
+  .strong { color: #f5d4a4; font-weight: 600; }
+  .scenario-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid #4a90e2;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 6px;
+  }
+  .scenario-card.warning { border-left-color: #e2784a; }
+  .scenario-card.positive { border-left-color: #4ae28a; }
+  .scenario-card h4 { font-size: 15px; margin-bottom: 8px; color: #f0e0c0; }
+  .scenario-card ul { margin-left: 16px; font-size: 14px; color: #c0c0d0; }
+  .scenario-card li { margin: 6px 0; }
+  .formula {
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(74, 144, 226, 0.1));
+    padding: 28px;
+    border-radius: 12px;
+    margin: 30px 0;
+    text-align: center;
+    border: 1px solid rgba(212, 165, 116, 0.3);
+  }
+  .formula-text { font-size: 20px; color: #f5d4a4; letter-spacing: 1px; margin: 8px 0; }
+  .formula-note { font-size: 13px; color: #a0a0b8; margin-top: 12px; }
+  .stage-path { display: flex; flex-direction: column; gap: 16px; margin: 30px 0; }
+  .stage {
+    display: flex;
+    gap: 16px;
+    background: rgba(255,255,255,0.04);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #d4a574;
+  }
+  .stage.highlighted {
+    background: rgba(212, 165, 116, 0.15);
+    border-left-color: #f5d4a4;
+    box-shadow: 0 0 20px rgba(212, 165, 116, 0.2);
+  }
+  .stage-num { font-size: 32px; font-weight: 700; color: #d4a574; line-height: 1; min-width: 50px; }
+  .stage-content h4 { font-size: 16px; color: #f5d4a4; margin-bottom: 6px; }
+  .stage-content p { font-size: 13px; color: #c0c0d0; margin: 0; }
+  .recommended-tag {
+    display: inline-block;
+    background: #d4a574;
+    color: #0a0e27;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    margin-left: 10px;
+    font-weight: 600;
+  }
+  .radar-container {
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 24px 0;
+  }
+  .radar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #a0a0b8;
+    flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .signal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+  .signal-item {
+    background: rgba(255,255,255,0.04);
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #d0d0e0;
+    border-left: 2px solid #d4a574;
+  }
+  /* 你能成多大的事 - 进度条 */
+  .capacity-bar {
+    margin: 30px 0 50px;
+    padding: 40px 20px 30px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+  }
+  .capacity-bar-track {
+    height: 50px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.06);
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .capacity-bar-fill {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, #4a90e2 0%, #6ab0f5 100%);
+    border-radius: 25px 0 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .capacity-bar-rest {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(226, 120, 74, 0.1),
+      rgba(226, 120, 74, 0.1) 6px,
+      rgba(226, 120, 74, 0.2) 6px,
+      rgba(226, 120, 74, 0.2) 12px
+    );
+    border-radius: 0 25px 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e2784a;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .capacity-boundary {
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    bottom: -10px;
+    width: 2px;
+    background: #f5d4a4;
+    transform: translateX(-1px);
+  }
+  .capacity-boundary::after {
+    content："你现在能成的事的边界"；
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 12px;
+    color: #f5d4a4;
+    font-weight: 600;
+  }
+  .capacity-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #a0a0b8;
+  }
+  .loop-diagram { margin: 30px auto; max-width: 420px; }
+  /* 人生格局对照 */
+  .life-path {
+    background: rgba(255,255,255,0.04);
+    padding: 28px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-top: 3px solid;
+  }
+  .life-path.path-a { border-top-color: #e2784a; }
+  .life-path.path-b { border-top-color: #4ae28a; }
+  .life-path-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  .life-path-label.bad { color: #e2784a; }
+  .life-path-label.good { color: #4ae28a; }
+  .life-path h4 {
+    font-size: 19px;
+    margin-bottom: 18px;
+    color: #f0e0c0;
+  }
+  .life-path p {
+    font-size: 14.5px;
+    line-height: 1.95;
+    color: #d0d0e0;
+    margin-bottom: 14px;
+  }
+  .life-path .closing {
+    font-style: italic;
+    margin-top: 16px;
+  }
+  .life-path.path-a .closing { color: #e2a584; }
+  .life-path.path-b .closing { color: #84e2a5; }
+  .dimension-block {
+    margin: 18px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(255,255,255,0.08);
+  }
+  .dimension-block:last-of-type { border-bottom: none; }
+  .dimension-title {
+    font-size: 15px;
+    color: #f5d4a4;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .dimension-layer {
+    font-size: 11px;
+    color: #909090;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .dimension-block p {
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 8px;
+  }
+  /* 方向卡片 */
+  .direction-card {
+    background: rgba(255,255,255,0.04);
+    padding: 22px 24px;
+    border-radius: 10px;
+    margin: 16px 0;
+    border-left: 3px solid #d4a574;
+  }
+  .direction-card .direction-num {
+    font-size: 12px;
+    color: #d4a574;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .direction-card h4 {
+    font-size: 17px;
+    color: #f5d4a4;
+    margin-bottom: 10px;
+  }
+  .direction-card p {
+    font-size: 14px;
+    color: #c8c8d8;
+    line-height: 1.85;
+    margin: 0;
+  }
+  /* 结尾区 */
+  .closing-block {
+    background: linear-gradient(135deg, rgba(42, 31, 74, 0.5), rgba(26, 32, 80, 0.5));
+    padding: 36px 32px;
+    text-align: center;
+    border-radius: 12px;
+    margin: 30px 0 20px;
+    border: 1px solid rgba(212, 165, 116, 0.2);
+  }
+  .closing-block p {
+    font-size: 15px;
+    color: #e0e0ec;
+    line-height: 2;
+    margin-bottom: 10px;
+  }
+  .closing-block .accent {
+    color: #f5d4a4;
+    margin-top: 20px;
+  }
+  .entry-link {
+    display: inline-block;
+    color: #d4a574;
+    border: 1px solid rgba(212, 165, 116, 0.5);
+    padding: 10px 28px;
+    border-radius: 24px;
+    margin-top: 24px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+  .entry-link:hover {
+    background: rgba(212, 165, 116, 0.1);
+  }
+  .footnote {
+    font-size: 12px;
+    color: #707080;
+    margin-top: 20px;
+    text-align: center;
+    padding: 20px;
+  }
+  @media (max-width: 600px) {
+    .module { padding: 40px 24px; }
+    .hero { padding: 50px 24px 35px; }
+    .opening-statement { padding: 40px 24px; }
+    .stage-divider { margin: 0 24px; padding: 30px 24px 15px; }
+    h1 { font-size: 24px; }
+    .hero-title { font-size: 30px; }
+    .signal-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-subtitle">成事基因测评 · 个人报告</div>
+  <div class="hero-title">内核已成型</div>
+  <p class="hero-tagline">
+    决定你能否成事的核心特质，<br>
+    在你身上已经长出来了。
+  </p>
+</div>
+
+<!-- 报告开场白(原"序"模块改为简洁的开场陈述，只放论断一作为思想锚点) -->
+<div class="opening-statement">
+  <div class="label">— 这份报告基于一个核心观点 —</div>
+  <p class="text">
+    卓越不是某种天赋，而是一套可被识别、<br>
+    可被学习、可被复制的内在模式。<br>
+    一个人未来能不能持续成事，<br>
+    不取决于他过去做成了什么，<br>
+    而取决于他体内是否正在运行这套模式。
+  </p>
+</div>
+
+<!-- 三段式分隔 · 现在 -->
+<div class="stage-divider">
+  <div class="stage-name">第 一 部 分 · 现 在</div>
+  <div class="stage-text">先看清楚——你正站在哪里，你身上有什么。</div>
+</div>
+
+<!-- 模块1：基因类型(整体类型画像，第二人称) -->
+<div class="module">
+  <div class="module-tag">01 · 你的基因类型</div>
+  <h1>内核已成型</h1>
+  <p style="font-size:18px; color:#f5d4a4; margin-bottom:28px; line-height:1.7;">
+    你能让自己清醒，<br>但很难让事情发生。
+  </p>
+
+  <p>你的成事方式是<span class="strong">"从内往外"</span>的——你先把一件事在脑子里想透，然后才行动。这让你比那些"先做再想"的人，少了很多无效消耗。你不会被风口带跑，不会被情绪推着走，不会被表象迷惑。在需要冷静判断的场合，你几乎天然就比别人多一种优势。</p>
+
+  <p>你最突出的成事特征，是<span class="strong">"清晰先行"</span>——清晰先行让你在"理解一件事"这件事上，几乎能达到同龄人里少见的深度。你对"自己是谁、想要什么、为什么活着"这些根本问题想得很深，你对意义和方向有一种天然的敏感，你能在压力下保持判断力，你能用语言把模糊的东西梳理清楚。这是大多数人需要花十几年甚至一辈子才能修炼到的水平。</p>
+
+  <p>但"清晰先行"的成事方式，也有它的代价。当你需要的不是"想清楚"，而是"做出来"；当你面对的不是"理解一件事"，而是"调动一群人去做一件事"；当你需要的不是"自己懂"，而是"让别人懂"——你会发现你过去赖以成事的那套方式，突然不够用了。</p>
+
+  <p>你不像那些懵懂奔跑的人——他们用力，但不知道为什么用力；你也不像那些已经走通的人——他们既清醒又能落地。你处在一个临界点上：<span class="strong">清醒地知道自己卡在哪里，但暂时还推不动</span>。</p>
+
+  <p>就像一颗种子，内部的胚芽已经发育完整，只是还在等待破土。</p>
+
+  <div class="hook">
+    <p>你在这个状态里停留多年，并不是因为你不够清醒——而是因为你还没有看清：清醒和落地，是两套完全不同的成事方式。</p>
+  </div>
+</div>
+
+<!-- 模块2：基因雷达图 -->
+<div class="module">
+  <div class="module-tag">02 · 你的基因雷达图</div>
+  <h1>你的六种特质，<br>各自的发展状况</h1>
+
+  <div class="radar-container">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:380px; display:block; margin:0 auto;">
+      <g stroke="#3a3a5a" fill="none" stroke-width="1">
+        <polygon points="200,80 304,140 304,260 200,320 96,260 96,140"/>
+        <polygon points="200,110 278,155 278,245 200,290 122,245 122,155"/>
+        <polygon points="200,140 252,170 252,230 200,260 148,230 148,170"/>
+        <polygon points="200,170 226,185 226,215 200,230 174,215 174,185"/>
+      </g>
+      <g stroke="#3a3a5a" stroke-width="1">
+        <line x1="200" y1="80" x2="200" y2="320"/>
+        <line x1="96" y1="140" x2="304" y2="260"/>
+        <line x1="96" y1="260" x2="304" y2="140"/>
+      </g>
+      <polygon points="200,90 295,145 280,250 200,280 120,250 105,145"
+               fill="rgba(212, 165, 116, 0.25)"
+               stroke="#d4a574" stroke-width="2"/>
+      <circle cx="200" cy="90" r="5" fill="#4a90e2"/>
+      <circle cx="295" cy="145" r="5" fill="#4a90e2"/>
+      <circle cx="105" cy="145" r="5" fill="#4a90e2"/>
+      <circle cx="280" cy="250" r="5" fill="#e2784a"/>
+      <circle cx="200" cy="280" r="5" fill="#e2784a"/>
+      <circle cx="120" cy="250" r="5" fill="#e2784a"/>
+
+      <text x="200" y="68" text-anchor="middle" fill="#4a90e2" font-size="13" font-weight="600">愿景显影</text>
+      <text x="316" y="138" fill="#4a90e2" font-size="13" font-weight="600">小我识别</text>
+      <text x="84" y="138" text-anchor="end" fill="#4a90e2" font-size="13" font-weight="600">语言换框</text>
+      <text x="316" y="265" fill="#e2784a" font-size="13" font-weight="600">卓越解码</text>
+      <text x="200" y="340" text-anchor="middle" fill="#e2784a" font-size="13" font-weight="600">成事场域</text>
+      <text x="84" y="265" text-anchor="end" fill="#e2784a" font-size="13" font-weight="600">醒觉领导</text>
+    </svg>
+    <div class="radar-legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#4a90e2;"></div>
+        <span>已充分发展</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#e2784a;"></div>
+        <span>尚未充分发展</span>
+      </div>
+    </div>
+  </div>
+
+  <p>雷达图直观地呈现了你六种关键特质的发展程度——<span class="strong">上半部分饱满，下半部分相对收缩</span>。这是你的成事基因当前的实际形状，也是接下来所有诊断的数据基础。</p>
+
+  <div class="hook">
+    <p>你可能在某些瞬间已经隐约感觉到这种不对称——但说不清它具体是什么。下面会一项一项说清楚。</p>
+  </div>
+</div>
+
+<!-- 模块3：你现在能成多大的事 -->
+<div class="module">
+  <div class="module-tag">03 · 你现在能成多大的事</div>
+  <h1>你目前能成的事，<br>有一条清晰的边界</h1>
+
+  <p>一个人能稳定推进多大的事，取决于他身上有多少种关键特质已经成型。你目前已成型的三种特质——愿景、自我觉察、语言能力——能够稳定支撑一类事情；而尚未发展的三种特质，构成了你目前能成的事的边界。</p>
+
+  <div class="capacity-bar">
+    <div class="capacity-bar-track">
+      <div class="capacity-bar-fill">已成型特质能成的事</div>
+      <div class="capacity-bar-rest">待唤醒的区域</div>
+      <div class="capacity-boundary"></div>
+    </div>
+    <div class="capacity-labels">
+      <span>个人深度输出</span>
+      <span>团队协同 · 资源整合 · 影响力外溢</span>
+    </div>
+  </div>
+
+  <h3>你目前能稳定推进的事</h3>
+  <p style="color:#84e2a5; font-size:15px; margin-bottom:12px;">
+    不依赖他人配合、靠你一个人的深度就能完成的事。
+  </p>
+  <div class="scenario-card positive">
+    <ul>
+      <li>需要独立思考、深度判断、原创洞察的事——做内容、做研究、做策略、做设计</li>
+      <li>涉及"想清楚一件事本质"的工作——做咨询、做诊断、做方向梳理</li>
+      <li>不依赖大量协作、靠个人功力推进的项目</li>
+      <li>需要在压力下保持判断力的场合——你不容易被情绪带偏</li>
+    </ul>
+  </div>
+
+  <h3>你现在还很难稳定推进的事</h3>
+  <p style="color:#e2a584; font-size:15px; margin-bottom:12px;">
+    需要把你的清晰转化为他人的行动、需要让一群人和资源围绕你运转的事。
+  </p>
+  <div class="scenario-card warning">
+    <ul>
+      <li>需要调动多方资源、协调多方利益的复杂项目</li>
+      <li>需要带十人以上团队、让别人持续跟随的工作</li>
+      <li>需要在短时间内识别"事情成败的真正变量"并快速决策的场景</li>
+      <li>需要把你脑子里清晰的版本，<span class="strong">完整传递给别人并让别人执行出来</span>的局面</li>
+    </ul>
+  </div>
+
+  <h3>你目前能成的事的边界，具体是什么</h3>
+
+  <p>你能成的事的边界，<span class="strong">画在"事情是否需要他人参与"这条线上</span>:</p>
+
+  <p>线的这一侧——只要事情可以靠你一个人推进，你就能做得很好，甚至比大多数人都做得更好；线的另一侧——一旦事情需要他人的持续投入、需要一个团队的协同、需要一个系统的支撑，你就会突然感到吃力。</p>
+
+  <p>这不是"努力一点就能跨过去"的边界——它是<span class="strong">你身上承担"复杂度"和"协同性"的那几种特质还没被唤醒</span>所形成的边界。换句话说，你不是被"事情本身"挡住的，而是被"自己身上某些尚未长出来的东西"挡住的。</p>
+
+  <div class="hook">
+    <p>这不是能力问题，是你基因序列里某些片段还在沉睡——它们可以被唤醒，但唤醒的方式，可能和你以为的不太一样。</p>
+  </div>
+</div>
+
+<!-- 三段式分隔 · 临界 -->
+<div class="stage-divider">
+  <div class="stage-name">第 二 部 分 · 临 界</div>
+  <div class="stage-text">你看清楚了自己的位置，下一个问题是——你为什么会走到这里，又为什么必须现在做出选择？</div>
+</div>
+
+<!-- 模块4：命运转折点 -->
+<div class="module">
+  <div class="module-tag">04 · 你的命运转折点</div>
+  <h1>你正站在一个临界点上</h1>
+
+  <p>一个人的内在特质组合，有它的承载边界。当外部要求的事情超出了这套特质能够支撑的范围，他就站在了命运的临界点上——这个时候，要么更新自己的特质组合涌现出新的模式，要么僵化下来陷入反复的内耗。</p>
+
+  <p>对于<span class="strong">内核已成型</span>的你，这个临界点通常以这样的方式到来——</p>
+
+  <h3>外部信号</h3>
+  <div class="signal-grid">
+    <div class="signal-item">一个原本你以为靠"想清楚"就能解决的事，突然要求你"做出来"，你卡住了</div>
+    <div class="signal-item">你被推到一个需要"带人"的位置上，但你一直擅长的是"自己想"</div>
+    <div class="signal-item">你的内在水平与现实结果之间，出现了越来越明显的落差</div>
+    <div class="signal-item">你开始怀疑——"我是不是想得太多、做得太少了？"</div>
+  </div>
+
+  <h3>内在信号</h3>
+  <div class="signal-grid">
+    <div class="signal-item">越来越频繁地有"我应该可以做得更大"的感觉，但不知从哪下手</div>
+    <div class="signal-item">对"再读一本书、再想清楚一点"产生隐隐的疲倦</div>
+    <div class="signal-item">意识到下一阶段，已经不能再靠"继续把内在打磨更细"来抵达</div>
+    <div class="signal-item">偶尔会有一种"被自己看穿"的孤独——清楚很多，却无人共鸣</div>
+  </div>
+
+  <h3>为什么这是一个真正的临界点</h3>
+
+  <p>因为你已经走到了<span class="strong">现有特质组合能支撑的最远的地方</span>。继续往内走，收益已经递减——你不会因为"再想清楚一点"就突破当前的瓶颈；但往外走，你又还没有真正具备外在表达所需要的那几种特质。</p>
+
+  <p>这是一个真正意义上的"必须做选择"的时刻——选择维持现状(让自己留在熟悉但已经饱和的区域)，还是选择主动更新自己的特质组合(涌现出新的成事模式)。</p>
+
+  <p>这个选择不是关于"努力一点"或"放松一点"的程度调节，而是关于<span class="strong">你身上要不要长出新东西</span>的根本性选择。</p>
+
+  <div class="hook">
+    <p>临界点最隐蔽的特征是——它不会一直等你。你内在的清晰是有时效的——它需要在合适的窗口期被转化为现实的影响力，否则会慢慢退化成一种自我消耗的智慧。</p>
+  </div>
+</div>
+
+<!-- 模块5：问题根源 -->
+<div class="module">
+  <div class="module-tag">05 · 问题的根源</div>
+  <h1>你的卡点不是意外，<br>是一条隐性规则在反复运行</h1>
+
+  <p>你可能会以为，你之所以"想得清楚但做不出来"，是因为缺少某些具体的能力——比如执行力、领导力、商业感。但这些都只是<span class="strong">表象</span>。</p>
+
+  <p>真正的根源，是你身上有一条<span class="strong">隐性规则</span>，在过去许多年里反复被验证、不断被强化：</p>
+
+  <div class="formula">
+    <div class="formula-text">清晰 = 完成</div>
+    <div class="formula-note">这是你身上一条被反复验证的隐性规则</div>
+  </div>
+
+  <p>这条规则不是你某天主动选择写下的——它是你的一系列成功经验自动沉淀出来的。在你过去的成长里，你大概率反复体验过这样的成功路径：把一件事想透了、想明白了，事情就基本解决了一半。</p>
+
+  <p>这种体验一次又一次发生，你的内在系统就自然形成了一个判断——<span class="strong">清晰，本身就接近于完成了</span>。</p>
+
+  <h3>这条规则是如何自我强化的</h3>
+
+  <div class="loop-diagram">
+    <svg viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; display:block;">
+      <circle cx="210" cy="40" r="35" fill="rgba(212, 165, 116, 0.15)" stroke="#d4a574" stroke-width="1.5"/>
+      <text x="210" y="38" text-anchor="middle" fill="#f5d4a4" font-size="11" font-weight="600">过去的</text>
+      <text x="210" y="52" text-anchor="middle" fill="#f5d4a4" font-size="11" font-weight="600">成功经验</text>
+
+      <circle cx="370" cy="140" r="35" fill="rgba(212, 165, 116, 0.15)" stroke="#d4a574" stroke-width="1.5"/>
+      <text x="370" y="138" text-anchor="middle" fill="#f5d4a4" font-size="11" font-weight="600">形成隐性</text>
+      <text x="370" y="152" text-anchor="middle" fill="#f5d4a4" font-size="11" font-weight="600">规则</text>
+
+      <circle cx="210" cy="240" r="35" fill="rgba(212, 165, 116, 0.15)" stroke="#d4a574" stroke-width="1.5"/>
+      <text x="210" y="238" text-anchor="middle" fill="#f5d4a4" font-size="11" font-weight="600">主导当下</text>
+      <text x="210" y="252" text-anchor="middle" fill="#f5d4a4" font-size="11" font-weight="600">的选择</text>
+
+      <circle cx="50" cy="140" r="35" fill="rgba(212, 165, 116, 0.15)" stroke="#d4a574" stroke-width="1.5"/>
+      <text x="50" y="138" text-anchor="middle" fill="#f5d4a4" font-size="11" font-weight="600">再次验证</text>
+      <text x="50" y="152" text-anchor="middle" fill="#f5d4a4" font-size="11" font-weight="600">规则</text>
+
+      <path d="M 245,55 Q 320,80 345,115" stroke="#d4a574" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 360,175 Q 320,210 245,225" stroke="#d4a574" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 175,225 Q 100,210 60,175" stroke="#d4a574" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 60,105 Q 100,80 175,55" stroke="#d4a574" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#d4a574"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+
+  <p>这个闭环每运行一次，这条规则就在你身上加深一分。所以你不是"偶尔卡住"，而是<span class="strong">这条隐性规则在持续地、自动地导向同一种结果</span>。</p>
+
+  <h3>这条规则曾经是你最大的资产</h3>
+
+  <p>在罗伯特的研究里，有一个非常重要的原则——<span class="strong">每一条限制性规则，在它形成的当下，都是一个合理的策略</span>。</p>
+
+  <p>你的"清晰=完成"也是这样。在你过去的环境里，深度思考的回报远高于落地执行——所以你的系统理性地把资源集中投放到了"想清楚"这一端。这个选择让你成为了一个比身边大多数人都更清醒的人，这是这条规则给你的礼物。</p>
+
+  <p>但现在，环境变了。你想要的下一阶段，需要的是另一套配置。<span class="strong">同一条规则，在过去是资产，在未来会变成负债</span>——除非它被看见，被理解，被允许更新。</p>
+
+  <div class="hook">
+    <p>一条规则只要还在隐性地运行，就会一直主导你的选择。它被看见的那一刻，才是它开始松动的那一刻——但这种"看见"，靠自己想通是很难真正发生的，因为正是"想通"这个动作本身，把你留在了原地。</p>
+  </div>
+</div>
+
+<!-- 模块6：资源盘点 -->
+<div class="module">
+  <div class="module-tag">06 · 你的资源盘点</div>
+  <h1>你已经握着别人没有的牌</h1>
+
+  <p>虽然你尚未发展的那几种特质暂时构成了你的瓶颈，但你身上已经成型的那几种特质，是一组<span class="strong">非常独特、非常稀缺</span>的资源：</p>
+
+  <div class="scenario-card positive">
+    <h4>资源一 · 清晰的方向感</h4>
+    <p style="margin:0; font-size:14px;">你不需要花时间纠结"我到底想做什么"——这对大多数人来说是终身难题，但你已经基本解决了。这意味着你接下来投入的每一份力气，都不会被"方向不明"消耗掉。</p>
+  </div>
+
+  <div class="scenario-card positive">
+    <h4>资源二 · 压力下不绊倒自己的能力</h4>
+    <p style="margin:0; font-size:14px;">你的自我觉察让你在情绪、防御、自我证明这些"内在干扰源"面前，比一般人多一层缓冲。当你真正开始做外在的事情时，你不会反复被自己耗光精力。</p>
+  </div>
+
+  <div class="scenario-card positive">
+    <h4>资源三 · 对语言与意义的敏感度</h4>
+    <p style="margin:0; font-size:14px;">你天然能听懂别人话里没说出来的部分、能用语言重新框定一件事的意义。这是极其稀缺的能力——它在"影响他人""带团队""做沟通"这些外在场景里，都是底层武器。你只是还没意识到它可以这样用。</p>
+  </div>
+
+  <h3>这些资源，能不能直接对冲你的卡点？</h3>
+
+  <p>罗伯特的研究里有一个核心原则，正好适用于你的处境：</p>
+
+  <div class="formula">
+    <div class="formula-text" style="font-size:18px;">内在资源 &nbsp;+&nbsp; 外在障碍</div>
+    <div class="formula-text" style="font-size:16px; color:#d4a574;">↓</div>
+    <div class="formula-text" style="font-size:22px; color:#f5d4a4;">= 可达成的挑战</div>
+  </div>
+
+  <p>这个公式的精妙之处在于——它<span class="strong">把"障碍"重新定义为"配合内在资源后可以转化的东西"</span>。</p>
+
+  <p>对你来说，尚未发展的那几种特质不是缺陷，而是<span class="strong">等待被你已有资源激活的挑战</span>。你现在把这些资源主要用在"对内"——理解自己、看清自己、表达自己。如果你能学会把同一组能力<span class="strong">调转方向、对外使用</span>:</p>
+
+  <div class="signal-grid">
+    <div class="signal-item">用清晰的方向感去 <strong style="color:#f5d4a4;">带团队</strong></div>
+    <div class="signal-item">用自我觉察去 <strong style="color:#f5d4a4;">读懂别人</strong></div>
+    <div class="signal-item">用语言能力去 <strong style="color:#f5d4a4;">影响他人</strong></div>
+    <div class="signal-item">用换框能力去 <strong style="color:#f5d4a4;">破局僵局</strong></div>
+  </div>
+
+  <p>你会发现——<span class="strong">你尚未发展的特质，其实没有你想象的那么远</span>。它们只是还没有被启动过。</p>
+
+  <p>但单靠你自己摸索这套"调转方向"的方法，会非常慢。这不是你不够聪明，而是因为"如何把已成型的特质，扩展到尚未成型的领域"，本身就是一套需要被系统学习的方法论——它有自己的层次、顺序、关键节点。零散试错，需要五到十年；有一套现成的框架，可能只需要一到两年。</p>
+
+  <div class="hook">
+    <p>你已经有了别人没有的"原材料"。接下来的差别，只在于你用什么方式把它们组装起来。</p>
+  </div>
+</div>
+
+<!-- 三段式分隔 · 未来 -->
+<div class="stage-divider">
+  <div class="stage-name">第 三 部 分 · 未 来</div>
+  <div class="stage-text">你已经清楚了自己的位置、自己的资源、自己的临界点。最后一个问题是——你可以走向哪里？</div>
+</div>
+
+<!-- 模块7：未来成事推演(五维度·路径对称化) -->
+<div class="module">
+  <div class="module-tag">07 · 未来成事推演</div>
+  <h1>未来，<br>你会走向哪一种轨迹</h1>
+
+  <p>未来不是被"目标"决定的，而是被"你当下正在运行的模式"塑造的。你今天身上的特质组合，会自动复制并放大到未来的每一天——你不需要预测未来，只需要看清你当下的模式，就能看见未来。</p>
+
+  <p>如果当下的模式继续运行，你会走向一种轨迹；如果当下的模式被更新，你会走向另一种轨迹。这两种轨迹会从五个层面同时展开——从你身边的世界，一路深入到你成为的那个人。</p>
+
+  <div class="life-path path-a">
+    <div class="life-path-label bad">路径 A · 模式继续运行</div>
+    <h4>你会走向一种"深度优先"的人生</h4>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你身边的人和资源</div>
+      <div class="dimension-layer">— 环境层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你身边会自然筛选出一群同样深度的人——他们能听懂你的"言外之意"，你们之间不需要解释。这是一种少见的高质量关系。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>大部分应酬式的关系会自动远离你，你身边的人会越来越少。这不是排斥，是清醒带来的自然安静。</p>
+    </div>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你日常在过的生活</div>
+      <div class="dimension-layer">— 行为层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你的日子会过得很纯粹——读书、思考、写作、与少数几个深谈对象交流。你的节奏完全是你自己的，没有人能推着你走。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>你的生活会比较安静，缺少"被一群人推着向前"的那种共振感和热闹感。</p>
+    </div>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你能做成的事业</div>
+      <div class="dimension-layer">— 能力层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>靠你一个人的深度能完成的事，你能做到极致——成为某个领域里少数真正想透了的人，你的洞察有它独特的厚度。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>需要他人持续配合、需要调动系统的事，会一直在你的能力边界之外。你能做成的事会有一个稳定的边界。</p>
+    </div>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你和财富的关系</div>
+      <div class="dimension-layer">— 信念层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你会形成一种"深度即价值"的财富信念——你能挣到与你深度匹配的合理收入，生活体面、自由、不必为生计妥协。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>你能挣到的钱，始终是"你一个人能直接挣到的钱"。你不会经历"系统性财富"的量级跃迁——你的财富天花板，是你信念的天花板。</p>
+    </div>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你成为的那个人</div>
+      <div class="dimension-layer">— 身份/愿景层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你会成为一个"少数人深度认可"的人——你的智慧有它的厚度，你的生活有它的尊严。这是一种安静的卓越。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>偶尔的某些瞬间，你会有一种"我本可以走得更远吗"的隐隐回响——你的智慧没有被这个世界完整看见过，你的愿景没有真正落地成一个可被记录的东西。</p>
+    </div>
+
+    <p class="closing">这是一条有它自己尊严的路径——它通向深度，也通向边界。</p>
+  </div>
+
+  <div class="life-path path-b">
+    <div class="life-path-label good">路径 B · 模式被更新</div>
+    <h4>你会走向一种"深度 + 影响"的人生</h4>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你身边的人和资源</div>
+      <div class="dimension-layer">— 环境层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你身边会聚集起一群能和你共事、共创、共担的人。你的清醒不再是隔离他人的壁垒，而是连接他人的桥梁——你会拥有一个属于自己的"场域"。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>你会失去一部分"只为自己负责"的自由——身边的人会向你提出要求，你需要学会回应。</p>
+    </div>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你日常在过的生活</div>
+      <div class="dimension-layer">— 行为层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你的日子会有一种新的节奏——你能看到自己心里想的事情真的在世界上一步步发生。这种"清晰被现实回应"的体验，是路径A里没有的。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>你的时间不再完全属于自己——你需要参与协调、对话、决策，你需要承受"被多线程拉扯"的状态。</p>
+    </div>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你能做成的事业</div>
+      <div class="dimension-layer">— 能力层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你会从"一个清醒的个人贡献者"，成长为"一个能让事情真正发生的人"——你能调动资源、影响他人、带动团队、构建系统。你的事业会有自己的生命力。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>你会承担更复杂的责任、更不确定的风险——这条路径上，你会面对管理的困境、影响力的反噬、规模带来的失控感。</p>
+    </div>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你和财富的关系</div>
+      <div class="dimension-layer">— 信念层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你会形成一种"系统创造价值"的财富信念——你赚到的钱会从"个人劳动收入"转变为"系统性收入"，这是完全不同的两个量级。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>你需要学会与不确定性、与他人、与系统的延迟反馈共处——这是路径A里不需要面对的复杂性。</p>
+    </div>
+
+    <div class="dimension-block">
+      <div class="dimension-title">你成为的那个人</div>
+      <div class="dimension-layer">— 身份/愿景层 —</div>
+      <p><strong style="color:#f0e0c0;">你会获得的：</strong>你依然是那个清醒的、有方向感的人——但你的清醒变成了一种创造力，一种贡献，一种在现实里产生回响的状态。你的愿景会被实现，你的价值会被看见。</p>
+      <p><strong style="color:#f0e0c0;">你需要承受的：</strong>你需要承担"被更多人看见"带来的暴露感和被误解——更大的影响力，意味着更复杂的关系和更多的目光。</p>
+    </div>
+
+    <p class="closing">这是一条更开阔、也更具挑战的路径——它通向影响，也通向责任。</p>
+  </div>
+
+  <p>这两条路径，不是"成功"与"失败"的对立，而是<span class="strong">两种不同的成事方式，各自有它的馈赠，也各自有它的挑战</span>。</p>
+
+  <p>差别只在于——你身上是否长出了那几种尚未成型的特质。<span class="strong">长出来，你就拥有了选择两条路径的自由；没长出来，路径B就只是一个想象，而你只能走路径A</span>。</p>
+
+  <div class="hook">
+    <p>真正的命运，不是从两条路径里选一条，而是先获得"可以选择"的能力。</p>
+  </div>
+</div>
+
+<!-- 模块8：成事策略(扩展为三方向+三阶+朴素结尾) -->
+<div class="module">
+  <div class="module-tag">08 · 你的成事策略</div>
+  <h1>唤醒尚未发展的关键特质，<br>让你的成事基因完整运转</h1>
+
+  <p>基于你目前的特质分布和命运转折点，你现在最该优先做的不是"补某一项短板"——而是要做一次<span class="strong">基因层面的更新</span>，让你已成型的特质组合，扩展出新的几条。</p>
+
+  <h2>针对你这种类型，有三个核心方向</h2>
+
+  <div class="direction-card">
+    <div class="direction-num">方向 一</div>
+    <h4>能力调转</h4>
+    <p>把你已经成型的能力(自我觉察、语言敏感度、方向感)，从"对内使用"系统化地调转为"对外使用"。这是你最容易获得突破的方向——因为你不需要从零生长出新能力，只需要学会把现有能力用在新地方。这个方向训练的是<strong style="color:#f5d4a4;">能力的迁移与扩展</strong>，它会让你发现：你以为缺少的东西，其实早就有了，只是没用对地方。</p>
+  </div>
+
+  <div class="direction-card">
+    <div class="direction-num">方向 二</div>
+    <h4>现实接口的搭建</h4>
+    <p>在你的"清晰想法"和"现实结果"之间，系统化地搭建几个关键的"中间接口"——比如让想法落地为可执行方案的接口、让方案变成多人协作的接口、让协作产生影响力的接口。这是你卡点最深的位置——因为你过去把"想清楚"当成了完成态，从来没意识到"想清楚"和"做出来"之间需要这些接口。这个方向训练的是<strong style="color:#f5d4a4;">从思想到现实的转化链路</strong>。</p>
+  </div>
+
+  <div class="direction-card">
+    <div class="direction-num">方向 三</div>
+    <h4>成事场域的激活</h4>
+    <p>从"一个人想清楚"，扩展到"让一个系统替你运转"。这意味着你不再是事情的唯一驱动者，而是一个场域的构建者——让人、资源、机制、节奏在你周围自然聚拢、自动运转。这是真正决定一个人能成多大事的关键能力，也是你目前完全没有触碰过的领域。这个方向训练的是<strong style="color:#f5d4a4;">从个人能力到系统影响力的跃迁</strong>。</p>
+  </div>
+
+  <h2>这三个方向，系统化训练的路径</h2>
+
+  <p>这三个方向不是孤立的技巧，而是一套有顺序、有层次的训练路径。罗伯特·迪尔茨数十年的研究和教学，把这套路径整理成了三个阶段——对应不同发展状态的成事者：</p>
+
+  <div class="stage-path">
+    <div class="stage">
+      <div class="stage-num">01</div>
+      <div class="stage-content">
+        <h4>自我突破</h4>
+        <p>识别身上隐性的"清醒陷阱"——"想得越透越不敢动"的悖论、"清晰=完成"的隐藏规则。完成内在层面的根本性更新。</p>
+      </div>
+    </div>
+
+    <div class="stage highlighted">
+      <div class="stage-num">02</div>
+      <div class="stage-content">
+        <h4>系统升级 <span class="recommended-tag">为你推荐</span></h4>
+        <p>你真正的主战场。系统性地展开上面三个方向的训练——能力调转、现实接口搭建、成事场域激活。这是你最缺、也最容易学会的部分。</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-num">03</div>
+      <div class="stage-content">
+        <h4>引领变革</h4>
+        <p>新特质成型之后的自然延伸——把你的清晰和能量，扩展为对他人的影响力，成为一个能带动别人觉醒的人。</p>
+      </div>
+    </div>
+  </div>
+
+  <p>对你来说，<span class="strong">第二阶是关键</span>。你已经具备了第一阶的大部分内核，第三阶是第二阶走通后的自然结果。如果你只能选一个阶段开始，<span class="strong">从第二阶进入，是最适合你目前状态的路径</span>。</p>
+
+  <!-- 朴素的结尾 -->
+  <div class="closing-block">
+    <p>你拥有的内核，在这个时代很稀缺。</p>
+    <p>而把内核变成现实重量的能力，需要一套专门的方法去打开。</p>
+    <p class="accent">这份报告所揭示的一切，不是为了让你焦虑——<br>而是为了让你看清楚：你正站在哪里，你身上有什么，你可以走向哪里。</p>
+    <p class="accent">决定权一直在你手上。</p>
+    <a href="#" class="entry-link">了解「系统升级」工作坊的详细内容 →</a>
+  </div>
+</div>
+
+<div class="footnote">
+  本报告基于罗伯特·迪尔茨的研究方法生成<br>
+  © Dilts Strategy Group
+</div>
+
+</div>
+
+</body>
+</html>
